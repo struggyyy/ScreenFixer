@@ -23,7 +23,6 @@ export default function Home() {
   const animate = () => {
     frameCount.current++;
     
-    // Use the selected intensity to determine frame skip
     if (frameCount.current >= INTENSITY_MAP[intensity]) {
       frameCount.current = 0;
       colorIndex.current = (colorIndex.current + 1) % colors.length;
@@ -67,46 +66,65 @@ export default function Home() {
         ref={bgRef}
         className="bg-mesh" 
         style={{ 
-          opacity: isRepairing ? 1 : 0.4,
+          opacity: isRepairing ? 1 : 1,
           transition: isRepairing ? 'none' : 'opacity 1s ease'
         }}
-      >
-        {!isRepairing && (
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                <stop offset="0%" style={{ stopColor: 'rgba(58, 134, 255, 0.15)', stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: 'rgba(0,0,0,0)', stopOpacity: 1 }} />
-              </radialGradient>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grad1)" />
-          </svg>
-        )}
-      </div>
+      />
       
       <main>
-        <div className={`control-container ${isRepairing ? 'hidden' : ''}`}>
-          <button 
-            className="repair-button"
-            onClick={(e) => {
-              e.stopPropagation(); 
-              setIsRepairing(true);
-            }}
-            title="Start the restoration process"
-          >
-            Start Screen Repair
-          </button>
+        <div className={`pixel-window ${isRepairing ? 'hidden' : ''}`}>
+          <div className="window-title">
+            <span>Screen_Fixer.exe</span>
+            <div className="window-controls">
+              <div className="window-dot">_</div>
+              <div className="window-dot">□</div>
+              <div className="window-dot">X</div>
+            </div>
+          </div>
+          
+          <div className="window-content">
+            <div className="pixel-eyes">
+              <svg width="84" height="64" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges">
+                {/* Left Eye */}
+                <path d="M4 4h10v24H4z" fill="#fff" />
+                <path d="M4 4v24M14 4v24M4 4h10M4 28h10" stroke="#000" strokeWidth="2" />
+                <path d="M4 12h5v8H4z" fill="#000" />
+                
+                {/* Right Eye */}
+                <path d="M24 4h10v24H24z" fill="#fff" />
+                <path d="M24 4v24M34 4v24M24 4h10M24 28h10" stroke="#000" strokeWidth="2" />
+                <path d="M24 12h5v8H24z" fill="#000" />
+              </svg>
+            </div>
+            <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Let&apos;s clean!</h1>
+            
+            <button 
+              className="repair-button"
+              onClick={(e) => {
+                e.stopPropagation(); 
+                setIsRepairing(true);
+              }}
+            >
+              Start Screen Repair
+            </button>
 
-          <div className="intensity-selector">
-            {(['low', 'medium', 'high'] as Intensity[]).map((level) => (
-              <button
-                key={level}
-                className={`intensity-btn ${intensity === level ? 'active' : ''}`}
-                onClick={() => setIntensity(level)}
-              >
-                {level}
-              </button>
-            ))}
+            <div className="intensity-selector">
+              {(['low', 'medium', 'high'] as Intensity[]).map((level) => (
+                <button
+                  key={level}
+                  className={`intensity-btn ${intensity === level ? 'active' : ''}`}
+                  onClick={() => setIntensity(level)}
+                >
+                  {level}
+                </button>
+              ))}
+            </div>
+
+            <div className="disclaimer">
+              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering. 
+              Do not look directly at the screen to avoid eye strain. 
+              For best results, leave running in the background for 2-4 hours.
+            </div>
           </div>
         </div>
       </main>

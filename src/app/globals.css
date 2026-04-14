@@ -1,10 +1,10 @@
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --accent: #3a86ff;
-  --accent-glow: rgba(58, 134, 255, 0.3);
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --background: #3459e5;
+  --window-bg: #fdfdfd;
+  --window-border: #000000;
+  --title-bar: #001389;
+  --btn-bg: #ffffff;
+  --btn-active: #e0e0e0;
 }
 
 * {
@@ -18,118 +18,14 @@ body {
   height: 100%;
   width: 100%;
   background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #000;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-body {
-  background: radial-gradient(circle at center, #111 0%, #000 100%);
-  -webkit-font-smoothing: antialiased;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  z-index: 10;
-}
-
-.control-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 20;
-}
-
-.control-container.hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-}
-
-.intensity-selector {
-  display: flex;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.35rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(5px);
-}
-
-.intensity-btn {
-  padding: 0.5rem 1.25rem;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #666;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.intensity-btn:hover {
-  color: #aaa;
-}
-
-.intensity-btn.active {
-  background: rgba(255, 255, 255, 0.07);
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.repair-button {
-  background: var(--glass);
-  color: #fff;
-  border: 1px solid var(--glass-border);
-  padding: 1.25rem 3rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-}
-
-.repair-button:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
-}
-
-.repair-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.6s ease;
-  z-index: -1;
-}
-
-.repair-button:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-/* Background animation for premium feel */
+/* Background scanlines for retro vibes */
 .bg-mesh {
   position: fixed;
   top: 0;
@@ -137,6 +33,140 @@ main {
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 0.4;
   pointer-events: none;
+}
+
+.bg-mesh::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 4px;
+  opacity: 0.1;
+}
+
+main {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pixel Window Frame */
+.pixel-window {
+  background: var(--window-bg);
+  border: 4px solid var(--window-border);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+  width: 480px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pixel-window.hidden {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  pointer-events: none;
+}
+
+.window-title {
+  background: var(--title-bar);
+  color: white;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  border-bottom: 4px solid var(--window-border);
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.window-dot {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #000;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #000;
+}
+
+.window-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Retro Buttons */
+.repair-button {
+  background: var(--btn-bg);
+  border: 4px solid #000;
+  box-shadow: inset -4px -4px 0px #ccc, 4px 4px 0px rgba(0,0,0,0.1);
+  padding: 1rem 2.5rem;
+  font-size: 1.7rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #000;
+}
+
+.repair-button:active {
+  box-shadow: inset 4px 4px 0px #ccc;
+  transform: translate(2px, 2px);
+}
+
+.intensity-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.intensity-btn {
+  background: #eee;
+  border: 3px solid #000;
+  padding: 6px 16px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: inset -2px -2px 0px #aaa, 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.intensity-btn.active {
+  background: #aaa;
+  box-shadow: inset 2px 2px 0px #888;
+  color: #fff;
+}
+
+/* Disclaimer Styling */
+.disclaimer {
+  font-size: 0.85rem;
+  text-align: center;
+  color: #444;
+  border: 3px solid #000;
+  background: #fffbe6;
+  padding: 12px;
+  margin-top: 15px;
+  line-height: 1.5;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+.pixel-eyes {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0px;
 }

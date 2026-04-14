@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { VT323 } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const vt323 = VT323({ 
+  weight: '400',
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Screen Fixer | Advanced Display Repair",
-  description: "The ultimate tool for pixel restoration and screen maintenance.",
+  title: "Screen Fixer | Retro Pixel Restoration",
+  description: "Advanced display repair with a nostalgic 8-bit aesthetic.",
 };
 
 export default function RootLayout({
@@ -16,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={vt323.className}>{children}</body>
     </html>
   );
 }
