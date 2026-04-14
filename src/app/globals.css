@@ -74,6 +74,57 @@ main {
   pointer-events: none;
 }
 
+.pixel-window.minimized {
+  transform: translate(calc(-50vw + 120px), calc(50vh - 40px)) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Taskbar */
+.taskbar {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.taskbar.visible {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.taskbar-app {
+  background: var(--btn-bg);
+  border: 3px solid #000;
+  box-shadow: inset -2px -2px 0px #ccc, 2px 2px 0px rgba(0,0,0,0.1);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28), background 0.2s, box-shadow 0.2s;
+  color: #000;
+  overflow: visible;
+}
+
+.taskbar-app:hover {
+  background: #eee;
+  transform: translateY(-4px);
+  box-shadow: inset -2px -2px 0px #ccc, 4px 4px 0px rgba(0,0,0,0.2);
+}
+
+.taskbar-app:active {
+  box-shadow: inset 2px 2px 0px #ccc;
+}
+
 .window-title {
   background: var(--title-bar);
   color: white;
@@ -100,6 +151,11 @@ main {
   justify-content: center;
   font-size: 10px;
   color: #000;
+  cursor: pointer;
+}
+
+.window-dot:hover {
+  background: #eee;
 }
 
 .window-content {

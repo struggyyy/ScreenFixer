@@ -12,6 +12,7 @@ const INTENSITY_MAP: Record<Intensity, number> = {
 
 export default function Home() {
   const [isRepairing, setIsRepairing] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [intensity, setIntensity] = useState<Intensity>('medium');
   const bgRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>(null);
@@ -72,11 +73,11 @@ export default function Home() {
       />
       
       <main>
-        <div className={`pixel-window ${isRepairing ? 'hidden' : ''}`}>
+        <div className={`pixel-window ${isRepairing ? 'hidden' : ''} ${isMinimized ? 'minimized' : ''}`}>
           <div className="window-title">
             <span>Screen_Fixer.exe</span>
             <div className="window-controls">
-              <div className="window-dot">_</div>
+              <div className="window-dot" onClick={() => setIsMinimized(true)}>_</div>
               <div className="window-dot">□</div>
               <div className="window-dot">X</div>
             </div>
@@ -84,11 +85,11 @@ export default function Home() {
           
           <div className="window-content">
             <div className="pixel-eyes">
-              <svg width="84" height="64" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges">
+              <svg width="84" height="64" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* Left Eye */}
-                <path d="M4 4h10v24H4z" fill="#fff" />
-                <path d="M4 4v24M14 4v24M4 4h10M4 28h10" stroke="#000" strokeWidth="2" />
-                <path d="M4 12h5v8H4z" fill="#000" />
+                <path d="M8 4h10v24H8z" fill="#fff" />
+                <path d="M8 4v24M18 4v24M8 4h10M8 28h10" stroke="#000" strokeWidth="2" />
+                <path d="M8 12h5v8H8z" fill="#000" />
                 
                 {/* Right Eye */}
                 <path d="M24 4h10v24H24z" fill="#fff" />
@@ -125,6 +126,21 @@ export default function Home() {
               Do not look directly at the screen to avoid eye strain. 
               For best results, leave running in the background for 2-4 hours.
             </div>
+          </div>
+        </div>
+
+        {/* Taskbar */}
+        <div className={`taskbar ${isMinimized ? 'visible' : ''}`}>
+          <div className="taskbar-app" onClick={() => setIsMinimized(false)}>
+            <svg width="26" height="20" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 4h10v24H8z" fill="#fff" />
+              <path d="M8 4v24M18 4v24M8 4h10M8 28h10" stroke="#000" strokeWidth="2" />
+              <path d="M8 12h5v8H8z" fill="#000" />
+              <path d="M24 4h10v24H24z" fill="#fff" />
+              <path d="M24 4v24M34 4v24M24 4h10M24 28h10" stroke="#000" strokeWidth="2" />
+              <path d="M24 12h5v8H24z" fill="#000" />
+            </svg>
+            <span>Screen_Fixer.exe</span>
           </div>
         </div>
       </main>
