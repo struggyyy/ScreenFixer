@@ -2,8 +2,17 @@
 
 import { useState, useEffect, useRef } from 'react';
 
+type Intensity = 'low' | 'medium' | 'high';
+
+const INTENSITY_MAP: Record<Intensity, number> = {
+  low: 10,
+  medium: 4,
+  high: 2,
+};
+
 export default function Home() {
   const [isRepairing, setIsRepairing] = useState(false);
+  const [intensity, setIntensity] = useState<Intensity>('medium');
   const bgRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>(null);
   const frameCount = useRef(0);
@@ -14,9 +23,8 @@ export default function Home() {
   const animate = () => {
     frameCount.current++;
     
-    // Change color every 3 frames (approx 50Hz on a 144Hz monitor, 20Hz on a 60Hz monitor)
-    // This allows the LCD crystals enough time to actually transition
-    if (frameCount.current >= 3) {
+    // Use the selected intensity to determine frame skip
+    if (frameCount.current >= INTENSITY_MAP[intensity]) {
       frameCount.current = 0;
       colorIndex.current = (colorIndex.current + 1) % colors.length;
       
@@ -51,7 +59,7 @@ export default function Home() {
         bgRef.current.style.backgroundColor = 'transparent';
       }
     }
-  }, [isRepairing]);
+  }, [isRepairing, intensity]);
 
   return (
     <>
@@ -77,16 +85,30 @@ export default function Home() {
       </div>
       
       <main>
-        <button 
-          className={`repair-button ${isRepairing ? 'hidden' : ''}`}
-          onClick={(e) => {
-            e.stopPropagation(); // Prevent immediate exit
-            setIsRepairing(true);
-          }}
-          title="Click to start optimized pixel restoration"
-        >
-          Start Screen Repair
-        </button>
+        <div className={`control-container ${isRepairing ? 'hidden' : ''}`}>
+          <button 
+            className="repair-button"
+            onClick={(e) => {
+              e.stopPropagation(); 
+              setIsRepairing(true);
+            }}
+            title="Start the restoration process"
+          >
+            Start Screen Repair
+          </button>
+
+          <div className="intensity-selector">
+            {(['low', 'medium', 'high'] as Intensity[]).map((level) => (
+              <button
+                key={level}
+                className={`intensity-btn ${intensity === level ? 'active' : ''}`}
+                onClick={() => setIntensity(level)}
+              >
+                {level}
+              </button>
+            ))}
+          </div>
+        </div>
       </main>
     </>
   );
