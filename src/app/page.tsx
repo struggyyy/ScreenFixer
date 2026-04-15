@@ -13,6 +13,7 @@ const INTENSITY_MAP: Record<Intensity, number> = {
 export default function Home() {
   const [isRepairing, setIsRepairing] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isMaximized, setIsMaximized] = useState(false);
   const [intensity, setIntensity] = useState<Intensity>('medium');
   const bgRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>(null);
@@ -73,13 +74,32 @@ export default function Home() {
       />
       
       <main>
-        <div className={`pixel-window ${isRepairing ? 'hidden' : ''} ${isMinimized ? 'minimized' : ''}`}>
+        <div className={`pixel-window ${isRepairing ? 'hidden' : ''} ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''}`}>
           <div className="window-title">
             <span>Screen_Fixer.exe</span>
             <div className="window-controls">
-              <div className="window-dot" onClick={() => setIsMinimized(true)}>_</div>
-              <div className="window-dot">□</div>
-              <div className="window-dot">X</div>
+              <div className="window-dot" onClick={() => setIsMinimized(true)}>
+                <svg width="10" height="10" viewBox="0 0 10 10">
+                  <rect x="1" y="7" width="8" height="2" fill="currentColor" />
+                </svg>
+              </div>
+              <div className="window-dot" onClick={() => setIsMaximized(!isMaximized)}>
+                {isMaximized ? (
+                  <svg width="10" height="10" viewBox="0 0 10 10">
+                    <path d="M3 1h6v6H3V1zM1 3h6v6H1V3z" fill="none" stroke="currentColor" strokeWidth="1" />
+                    <path d="M3 1h6M3 2h6M1 3h6M1 4h6" stroke="currentColor" strokeWidth="1" />
+                  </svg>
+                ) : (
+                  <svg width="10" height="10" viewBox="0 0 10 10">
+                    <rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                )}
+              </div>
+              <div className="window-dot window-dot-close">
+                <svg width="10" height="10" viewBox="0 0 10 10">
+                  <path d="M1 1l8 8M1 9l8-8" stroke="white" strokeWidth="2" />
+                </svg>
+              </div>
             </div>
           </div>
           
