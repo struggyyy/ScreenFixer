@@ -84,6 +84,134 @@ main {
   pointer-events: none;
 }
 
+.pixel-window.trashed {
+  animation: window-crumble 1.2s forwards cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+/* Recycle Bin */
+.recycle-bin {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 100;
+  animation: bin-pop-in 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.recycle-bin:hover {
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.trash-lid {
+  transform-origin: 42px 60px;
+  animation: lid-pop 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+}
+
+.trash-lid.restoring {
+  /* Same lid-pop, but fires immediately (no 0.5s delay) so lid opens as card exits */
+  animation: lid-pop 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+@keyframes lid-pop {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(-90deg) translate(-20px, -20px); }
+  75% { transform: rotate(-90deg) translate(-20px, -20px); }
+  100% { transform: rotate(0); }
+}
+
+.recycle-bin.full {
+  animation: bin-bounce 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1.2s;
+}
+
+/* Animation Keyframes */
+@keyframes window-crumble {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-52%, -58%) scale(0.6) rotate(10deg) skew(15deg, -5deg);
+  }
+  40% {
+    transform: translate(-48%, -50%) scale(0.3) rotate(-20deg) skew(-20deg, 10deg);
+  }
+  60% {
+    transform: translate(-50%, -10vh) scale(0.1) rotate(45deg) skew(30deg, 20deg);
+  }
+  85% {
+    transform: translate(-50%, 2vh) scale(0.04) rotate(360deg);
+    opacity: 1;
+  }
+  90% {
+    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bin-pop-in {
+  from { transform: translateX(-50%) translateY(40px) scale(0.5); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes bin-bounce {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.15); }
+}
+
+.bin-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Exact copy of window-crumble under a different name so browser treats it as a new animation */
+@keyframes window-uncrumble {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-52%, -58%) scale(0.6) rotate(10deg) skew(15deg, -5deg);
+  }
+  40% {
+    transform: translate(-48%, -50%) scale(0.3) rotate(-20deg) skew(-20deg, 10deg);
+  }
+  60% {
+    transform: translate(-50%, -10vh) scale(0.1) rotate(45deg) skew(30deg, 20deg);
+  }
+  85% {
+    transform: translate(-50%, 2vh) scale(0.04) rotate(360deg);
+    opacity: 1;
+  }
+  90% {
+    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Decrumble — reverse of window-uncrumble. */
+/* fill-mode: both holds the 100% keyframe state (at bin, invisible) BEFORE animation starts, preventing snap. */
+.pixel-window.restoring {
+  animation: window-uncrumble 1.2s cubic-bezier(0.4, 0, 0.2, 1) reverse both;
+}
+
 .pixel-window.maximized {
   width: 100vw;
   height: 100vh;

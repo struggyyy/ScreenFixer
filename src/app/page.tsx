@@ -14,6 +14,8 @@ export default function Home() {
   const [isRepairing, setIsRepairing] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [isTrashed, setIsTrashed] = useState(false);
+  const [isRestoring, setIsRestoring] = useState(false);
   const [intensity, setIntensity] = useState<Intensity>('medium');
   const bgRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>(null);
@@ -62,6 +64,17 @@ export default function Home() {
     }
   }, [isRepairing, intensity]);
 
+  const handleClose = () => {
+    setIsMaximized(false); 
+    setIsTrashed(true);
+  };
+
+  const handleRestore = () => {
+    setIsRestoring(true);
+    setIsTrashed(false);
+    setTimeout(() => setIsRestoring(false), 1200);
+  };
+
   return (
     <>
       <div 
@@ -74,7 +87,7 @@ export default function Home() {
       />
       
       <main>
-        <div className={`pixel-window ${isRepairing ? 'hidden' : ''} ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''}`}>
+        <div className={`pixel-window ${isRepairing ? 'hidden' : ''} ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''} ${isTrashed ? 'trashed' : ''} ${isRestoring ? 'restoring' : ''}`}>
           <div className="window-title">
             <span>Screen_Fixer.exe</span>
             <div className="window-controls">
@@ -95,7 +108,7 @@ export default function Home() {
                   </svg>
                 )}
               </div>
-              <div className="window-dot window-dot-close">
+              <div className="window-dot window-dot-close" onClick={handleClose}>
                 <svg width="10" height="10" viewBox="0 0 10 10">
                   <path d="M1 1l8 8M1 9l8-8" stroke="white" strokeWidth="2" />
                 </svg>
@@ -106,12 +119,9 @@ export default function Home() {
           <div className="window-content">
             <div className="pixel-eyes">
               <svg width="84" height="64" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Left Eye */}
                 <path d="M8 4h10v24H8z" fill="#fff" />
                 <path d="M8 4v24M18 4v24M8 4h10M8 28h10" stroke="#000" strokeWidth="2" />
                 <path d="M8 12h5v8H8z" fill="#000" />
-                
-                {/* Right Eye */}
                 <path d="M24 4h10v24H24z" fill="#fff" />
                 <path d="M24 4v24M34 4v24M24 4h10M24 28h10" stroke="#000" strokeWidth="2" />
                 <path d="M24 12h5v8H24z" fill="#000" />
@@ -149,7 +159,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Taskbar */}
+        {/* Taskbar (Bottom Left) */}
         <div className={`taskbar ${isMinimized ? 'visible' : ''}`}>
           <div className="taskbar-app" onClick={() => setIsMinimized(false)}>
             <svg width="26" height="20" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -163,6 +173,35 @@ export default function Home() {
             <span>Screen_Fixer.exe</span>
           </div>
         </div>
+
+        {/* Recycle Bin (Bottom Middle) - Visible when trashed or restoring */}
+        {(isTrashed || isRestoring) && (
+          <div className="recycle-bin full" onClick={handleRestore}>
+            <div className="trash-icon">
+              <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Trash Body (shifted +30x, +50y) */}
+                <g className="trash-body">
+                  <path d="M45 60h30v40H45V60z" fill="#4a4a4a" />
+                  <path d="M45 60v40M75 60v40M45 100h30" stroke="#000" strokeWidth="2" />
+                  <rect x="48" y="60" width="2" height="40" fill="#222" />
+                  <rect x="54" y="60" width="2" height="40" fill="#222" />
+                  <rect x="60" y="60" width="2" height="40" fill="#222" />
+                  <rect x="66" y="60" width="2" height="40" fill="#222" />
+                  <rect x="72" y="60" width="2" height="40" fill="#222" />
+                </g>
+                
+                {/* Trash Lid (shifted +30x, +50y, origin at 42 60) */}
+                <g key={isRestoring ? 'restoring' : 'idle'} className={`trash-lid${isRestoring ? ' restoring' : ''}`}>
+                  <path d="M42 55h36v5H42v-5z" fill="#333" />
+                  <path d="M42 55v5M78 55v5M42 55h36" stroke="#000" strokeWidth="2" />
+                  <rect x="52" y="50" width="16" height="5" fill="#4a4a4a" />
+                  <path d="M52 50v5M68 50v5M52 50h16" stroke="#000" strokeWidth="2" />
+                </g>
+              </svg>
+            </div>
+            <span className="bin-label">{isRestoring ? 'Restoring...' : '1 Item'}</span>
+          </div>
+        )}
       </main>
     </>
   );
