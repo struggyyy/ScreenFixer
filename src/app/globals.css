@@ -23,7 +23,9 @@
 .fullscreen-btn {
   background: #ddd;
   border: 3px solid #000;
-  box-shadow: inset -3px -3px 0px #aaa, 2px 2px 0px rgba(0,0,0,0.15);
+  box-shadow:
+    inset -3px -3px 0px #aaa,
+    2px 2px 0px rgba(0, 0, 0, 0.15);
   padding: 0.25rem 0.6rem;
   font-size: 0.9rem;
   font-family: inherit;
@@ -38,7 +40,9 @@
 
 .fullscreen-btn:hover {
   background: #c8c8c8;
-  box-shadow: inset -3px -3px 0px #999, 2px 2px 0px rgba(0,0,0,0.15);
+  box-shadow:
+    inset -3px -3px 0px #999,
+    2px 2px 0px rgba(0, 0, 0, 0.15);
 }
 
 .fullscreen-btn:active {
@@ -76,7 +80,7 @@ body {
 }
 
 .bg-mesh::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -158,10 +162,18 @@ main {
 }
 
 @keyframes lid-pop {
-  0% { transform: rotate(0); }
-  25% { transform: rotate(-90deg) translate(-20px, -20px); }
-  75% { transform: rotate(-90deg) translate(-20px, -20px); }
-  100% { transform: rotate(0); }
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-90deg) translate(-20px, -20px);
+  }
+  75% {
+    transform: rotate(-90deg) translate(-20px, -20px);
+  }
+  100% {
+    transform: rotate(0);
+  }
 }
 
 .recycle-bin.full {
@@ -198,13 +210,24 @@ main {
 }
 
 @keyframes bin-pop-in {
-  from { transform: translateX(-50%) translateY(40px) scale(0.5); opacity: 0; }
-  to { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+  from {
+    transform: translateX(-50%) translateY(40px) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes bin-bounce {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.15); }
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.15);
+  }
 }
 
 .bin-label {
@@ -297,14 +320,19 @@ main {
 .taskbar-app {
   background: var(--btn-bg);
   border: 3px solid #000;
-  box-shadow: inset -2px -2px 0px #ccc, 2px 2px 0px rgba(0,0,0,0.1);
+  box-shadow:
+    inset -2px -2px 0px #ccc,
+    2px 2px 0px rgba(0, 0, 0, 0.1);
   padding: 6px 12px;
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28), background 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+    background 0.2s,
+    box-shadow 0.2s;
   color: #000;
   overflow: visible;
 }
@@ -312,7 +340,9 @@ main {
 .taskbar-app:hover {
   background: #eee;
   transform: translateY(-4px);
-  box-shadow: inset -2px -2px 0px #ccc, 4px 4px 0px rgba(0,0,0,0.2);
+  box-shadow:
+    inset -2px -2px 0px #ccc,
+    4px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
 .taskbar-app:active {
@@ -372,7 +402,9 @@ main {
 .repair-button {
   background: var(--btn-bg);
   border: 4px solid #000;
-  box-shadow: inset -4px -4px 0px #ccc, 4px 4px 0px rgba(0,0,0,0.1);
+  box-shadow:
+    inset -4px -4px 0px #ccc,
+    4px 4px 0px rgba(0, 0, 0, 0.1);
   padding: 1rem 2.5rem;
   font-size: 1.7rem;
   font-family: inherit;
@@ -405,7 +437,9 @@ main {
   font-family: inherit;
   font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: inset -2px -2px 0px #aaa, 2px 2px 0px rgba(0,0,0,0.1);
+  box-shadow:
+    inset -2px -2px 0px #aaa,
+    2px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
 .intensity-btn:hover {
@@ -432,7 +466,7 @@ main {
   padding: 12px;
   margin-top: 15px;
   line-height: 1.5;
-  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .pixel-eyes {

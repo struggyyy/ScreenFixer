@@ -32,21 +32,7 @@ export function useScreenRepair(): UseScreenRepairReturn {
   const colorIndex = useRef(0);
 
   const stopRepair = useCallback(() => setIsRepairing(false), []);
-
-  const animate = useCallback(() => {
-    frameCount.current++;
-
-    if (frameCount.current >= INTENSITY_MAP[intensity]) {
-      frameCount.current = 0;
-      colorIndex.current = (colorIndex.current + 1) % FLASH_COLORS.length;
-
-      if (bgRef.current) {
-        bgRef.current.style.backgroundColor = FLASH_COLORS[colorIndex.current];
-      }
-    }
-
-    rafRef.current = requestAnimationFrame(animate);
-  }, [intensity]);
+  const startRepair = useCallback(() => setIsRepairing(true), []);
 
   useEffect(() => {
     if (!isRepairing) {
@@ -54,16 +40,33 @@ export function useScreenRepair(): UseScreenRepairReturn {
       return;
     }
 
+    const framesPerSwitch = INTENSITY_MAP[intensity];
+
+    function animate() {
+      frameCount.current++;
+
+      if (frameCount.current >= framesPerSwitch) {
+        frameCount.current = 0;
+        colorIndex.current = (colorIndex.current + 1) % FLASH_COLORS.length;
+
+        if (bgRef.current) {
+          bgRef.current.style.backgroundColor = FLASH_COLORS[colorIndex.current];
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
+    }
+
     rafRef.current = requestAnimationFrame(animate);
 
-    const handleExit = (e: KeyboardEvent | MouseEvent) => {
+    function handleExit(e: KeyboardEvent | MouseEvent) {
       if (
         e.type === 'click' ||
         (e instanceof KeyboardEvent && (e.key === 'Escape' || e.key === ' '))
       ) {
         stopRepair();
       }
-    };
+    }
 
     window.addEventListener('keydown', handleExit);
     window.addEventListener('click', handleExit);
@@ -73,9 +76,7 @@ export function useScreenRepair(): UseScreenRepairReturn {
       window.removeEventListener('keydown', handleExit);
       window.removeEventListener('click', handleExit);
     };
-  }, [isRepairing, animate, stopRepair]);
-
-  const startRepair = useCallback(() => setIsRepairing(true), []);
+  }, [isRepairing, intensity, stopRepair]);
 
   return { isRepairing, intensity, setIntensity, startRepair, bgRef };
 }

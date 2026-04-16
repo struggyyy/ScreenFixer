@@ -88,18 +88,16 @@ export default function Home() {
             </div>
 
             <div className="disclaimer">
-              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering.
-              Do not look directly at the screen to avoid eye strain.
-              For best results, leave running in the background for 2-4 hours.
+              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering. Do not look
+              directly at the screen to avoid eye strain. For best results, leave running in the
+              background for 2-4 hours.
             </div>
           </div>
         </div>
 
         <Taskbar isVisible={isMinimized} title={APP_TITLE} onRestore={unminimize} />
 
-        {(isTrashed || isRestoring) && (
-          <RecycleBin isRestoring={isRestoring} onRestore={restore} />
-        )}
+        {(isTrashed || isRestoring) && <RecycleBin isRestoring={isRestoring} onRestore={restore} />}
       </main>
     </>
   );

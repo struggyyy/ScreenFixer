@@ -12,7 +12,7 @@ export const RepairOverlay = forwardRef<HTMLDivElement, RepairOverlayProps>(
       className="bg-mesh"
       style={{ transition: isRepairing ? 'none' : 'opacity 1s ease' }}
     />
-  )
+  ),
 );
 
 RepairOverlay.displayName = 'RepairOverlay';
