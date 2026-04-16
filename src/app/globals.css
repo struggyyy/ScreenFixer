@@ -7,6 +7,45 @@
   --btn-active: #e0e0e0;
 }
 
+.fullscreen-hint-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fullscreen-hint-text {
+  font-size: 0.88rem;
+  color: #555;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fullscreen-btn {
+  background: #ddd;
+  border: 3px solid #000;
+  box-shadow: inset -3px -3px 0px #aaa, 2px 2px 0px rgba(0,0,0,0.15);
+  padding: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.fullscreen-btn:hover {
+  background: #c8c8c8;
+  box-shadow: inset -3px -3px 0px #999, 2px 2px 0px rgba(0,0,0,0.15);
+}
+
+.fullscreen-btn:active {
+  box-shadow: inset 3px 3px 0px #aaa;
+  transform: translate(1px, 1px);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -144,12 +183,12 @@ main {
   60% {
     transform: translate(-50%, -10vh) scale(0.1) rotate(45deg) skew(30deg, 20deg);
   }
-  85% {
-    transform: translate(-50%, 2vh) scale(0.04) rotate(360deg);
+  78% {
+    transform: translate(-50%, 2vh) scale(0.02) rotate(360deg);
     opacity: 1;
   }
-  90% {
-    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+  84% {
+    transform: translate(-50%, 5vh) scale(0.01) rotate(400deg);
     opacity: 0;
   }
   100% {
@@ -192,12 +231,12 @@ main {
   60% {
     transform: translate(-50%, -10vh) scale(0.1) rotate(45deg) skew(30deg, 20deg);
   }
-  85% {
-    transform: translate(-50%, 2vh) scale(0.04) rotate(360deg);
+  78% {
+    transform: translate(-50%, 2vh) scale(0.02) rotate(360deg);
     opacity: 1;
   }
-  90% {
-    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+  84% {
+    transform: translate(-50%, 5vh) scale(0.01) rotate(400deg);
     opacity: 0;
   }
   100% {
@@ -314,11 +353,11 @@ main {
 }
 
 .window-content {
-  padding: 2rem;
+  padding: 1.4rem 2rem 1.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 /* Retro Buttons */
@@ -335,6 +374,10 @@ main {
   align-items: center;
   gap: 12px;
   color: #000;
+}
+
+.repair-button:hover {
+  background: #eee;
 }
 
 .repair-button:active {
@@ -357,10 +400,18 @@ main {
   box-shadow: inset -2px -2px 0px #aaa, 2px 2px 0px rgba(0,0,0,0.1);
 }
 
+.intensity-btn:hover {
+  background: #d5d5d5;
+}
+
 .intensity-btn.active {
   background: #aaa;
   box-shadow: inset 2px 2px 0px #888;
   color: #fff;
+}
+
+.intensity-btn.active:hover {
+  background: #bbb;
 }
 
 /* Disclaimer Styling */

@@ -16,6 +16,7 @@ export default function Home() {
   const [isMaximized, setIsMaximized] = useState(false);
   const [isTrashed, setIsTrashed] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [intensity, setIntensity] = useState<Intensity>('medium');
   const bgRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>(null);
@@ -63,6 +64,12 @@ export default function Home() {
       }
     }
   }, [isRepairing, intensity]);
+
+  useEffect(() => {
+    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => document.removeEventListener('fullscreenchange', onFsChange);
+  }, []);
 
   const handleClose = () => {
     setIsMaximized(false); 
@@ -127,7 +134,19 @@ export default function Home() {
                 <path d="M24 12h5v8H24z" fill="#000" />
               </svg>
             </div>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Let&apos;s clean!</h1>
+            <h1 style={{ fontSize: '2.5rem', marginBottom: '0' }}>Let&apos;s clean!</h1>
+            <div className="fullscreen-hint-row">
+              <button
+                className="fullscreen-btn"
+                onClick={() => isFullscreen ? document.exitFullscreen() : document.documentElement.requestFullscreen?.()}
+                title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+              >
+                <kbd>F11</kbd>
+              </button>
+              <span className="fullscreen-hint-text">
+                {isFullscreen ? 'Exit fullscreen mode' : 'Enter fullscreen for best results'}
+              </span>
+            </div>
             
             <button 
               className="repair-button"
