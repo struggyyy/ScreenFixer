@@ -216,7 +216,17 @@ main {
   border-radius: 4px;
 }
 
-/* Exact copy of window-crumble under a different name so browser treats it as a new animation */
+/*
+ * window-uncrumble has identical keyframes to window-crumble by design.
+ *
+ * Browsers cache animations by name: reusing "window-crumble" on the .restoring
+ * class would NOT restart the animation — the engine sees the same name and does
+ * nothing. A distinct name forces a new animation instance, which we then play in
+ * reverse to get the "un-crumble" (restore) effect.
+ *
+ * fill-mode: both holds the 100% keyframe state (window at bin, invisible) before
+ * the animation starts, preventing a visible snap back to centre.
+ */
 @keyframes window-uncrumble {
   0% {
     transform: translate(-50%, -50%) scale(1) rotate(0);
@@ -245,8 +255,6 @@ main {
   }
 }
 
-/* Decrumble — reverse of window-uncrumble. */
-/* fill-mode: both holds the 100% keyframe state (at bin, invisible) BEFORE animation starts, preventing snap. */
 .pixel-window.restoring {
   animation: window-uncrumble 1.2s cubic-bezier(0.4, 0, 0.2, 1) reverse both;
 }

@@ -1,144 +1,61 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { type Intensity, useScreenRepair } from '@/hooks/useScreenRepair';
+import { useFullscreen } from '@/hooks/useFullscreen';
+import { useWindowState } from '@/hooks/useWindowState';
 
-type Intensity = 'low' | 'medium' | 'high';
+import { RepairOverlay } from '@/components/RepairOverlay';
+import { WindowTitleBar } from '@/components/WindowTitleBar';
+import { PixelEyes } from '@/components/PixelEyes';
+import { Taskbar } from '@/components/Taskbar';
+import { RecycleBin } from '@/components/RecycleBin';
 
-const INTENSITY_MAP: Record<Intensity, number> = {
-  low: 10,
-  medium: 4,
-  high: 2,
-};
+const APP_TITLE = 'Screen_Fixer.exe';
+const INTENSITY_LEVELS: Intensity[] = ['low', 'medium', 'high'];
 
 export default function Home() {
-  const [isRepairing, setIsRepairing] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [isMaximized, setIsMaximized] = useState(false);
-  const [isTrashed, setIsTrashed] = useState(false);
-  const [isRestoring, setIsRestoring] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [intensity, setIntensity] = useState<Intensity>('medium');
-  const bgRef = useRef<HTMLDivElement>(null);
-  const requestRef = useRef<number>(null);
-  const frameCount = useRef(0);
-  const colorIndex = useRef(0);
+  const { isRepairing, intensity, setIntensity, startRepair, bgRef } = useScreenRepair();
+  const { isFullscreen, toggleFullscreen } = useFullscreen();
+  const { windowState, minimize, unminimize, toggleMaximize, close, restore } = useWindowState();
 
-  const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF', '#000000'];
+  const { isMinimized, isMaximized, isTrashed, isRestoring } = windowState;
 
-  const animate = () => {
-    frameCount.current++;
-    
-    if (frameCount.current >= INTENSITY_MAP[intensity]) {
-      frameCount.current = 0;
-      colorIndex.current = (colorIndex.current + 1) % colors.length;
-      
-      if (bgRef.current) {
-        bgRef.current.style.backgroundColor = colors[colorIndex.current];
-      }
-    }
-    
-    requestRef.current = requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    if (isRepairing) {
-      requestRef.current = requestAnimationFrame(animate);
-      
-      const handleExit = (e: KeyboardEvent | MouseEvent) => {
-        if (e.type === 'click' || (e instanceof KeyboardEvent && (e.key === 'Escape' || e.key === ' '))) {
-          setIsRepairing(false);
-        }
-      };
-
-      window.addEventListener('keydown', handleExit);
-      window.addEventListener('click', handleExit);
-
-      return () => {
-        if (requestRef.current) cancelAnimationFrame(requestRef.current);
-        window.removeEventListener('keydown', handleExit);
-        window.removeEventListener('click', handleExit);
-      };
-    } else {
-      if (bgRef.current) {
-        bgRef.current.style.backgroundColor = 'transparent';
-      }
-    }
-  }, [isRepairing, intensity]);
-
-  useEffect(() => {
-    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
-    document.addEventListener('fullscreenchange', onFsChange);
-    return () => document.removeEventListener('fullscreenchange', onFsChange);
-  }, []);
-
-  const handleClose = () => {
-    setIsMaximized(false); 
-    setIsTrashed(true);
-  };
-
-  const handleRestore = () => {
-    setIsRestoring(true);
-    setIsTrashed(false);
-    setTimeout(() => setIsRestoring(false), 1200);
-  };
+  const windowClasses = [
+    'pixel-window',
+    isRepairing && 'hidden',
+    isMinimized && 'minimized',
+    isMaximized && 'maximized',
+    isTrashed && 'trashed',
+    isRestoring && 'restoring',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <>
-      <div 
-        ref={bgRef}
-        className="bg-mesh" 
-        style={{ 
-          opacity: isRepairing ? 1 : 1,
-          transition: isRepairing ? 'none' : 'opacity 1s ease'
-        }}
-      />
-      
+      <RepairOverlay ref={bgRef} isRepairing={isRepairing} />
+
       <main>
-        <div className={`pixel-window ${isRepairing ? 'hidden' : ''} ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''} ${isTrashed ? 'trashed' : ''} ${isRestoring ? 'restoring' : ''}`}>
-          <div className="window-title">
-            <span>Screen_Fixer.exe</span>
-            <div className="window-controls">
-              <div className="window-dot" onClick={() => setIsMinimized(true)}>
-                <svg width="10" height="10" viewBox="0 0 10 10">
-                  <rect x="1" y="7" width="8" height="2" fill="currentColor" />
-                </svg>
-              </div>
-              <div className="window-dot" onClick={() => setIsMaximized(!isMaximized)}>
-                {isMaximized ? (
-                  <svg width="10" height="10" viewBox="0 0 10 10">
-                    <path d="M3 1h6v6H3V1zM1 3h6v6H1V3z" fill="none" stroke="currentColor" strokeWidth="1" />
-                    <path d="M3 1h6M3 2h6M1 3h6M1 4h6" stroke="currentColor" strokeWidth="1" />
-                  </svg>
-                ) : (
-                  <svg width="10" height="10" viewBox="0 0 10 10">
-                    <rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                )}
-              </div>
-              <div className="window-dot window-dot-close" onClick={handleClose}>
-                <svg width="10" height="10" viewBox="0 0 10 10">
-                  <path d="M1 1l8 8M1 9l8-8" stroke="white" strokeWidth="2" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          
+        <div className={windowClasses}>
+          <WindowTitleBar
+            title={APP_TITLE}
+            isMaximized={isMaximized}
+            onMinimize={minimize}
+            onToggleMaximize={toggleMaximize}
+            onClose={close}
+          />
+
           <div className="window-content">
             <div className="pixel-eyes">
-              <svg width="84" height="64" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 4h10v24H8z" fill="#fff" />
-                <path d="M8 4v24M18 4v24M8 4h10M8 28h10" stroke="#000" strokeWidth="2" />
-                <path d="M8 12h5v8H8z" fill="#000" />
-                <path d="M24 4h10v24H24z" fill="#fff" />
-                <path d="M24 4v24M34 4v24M24 4h10M24 28h10" stroke="#000" strokeWidth="2" />
-                <path d="M24 12h5v8H24z" fill="#000" />
-              </svg>
+              <PixelEyes />
             </div>
+
             <h1 style={{ fontSize: '2.5rem', marginBottom: '0' }}>Let&apos;s clean!</h1>
+
             <div className="fullscreen-hint-row">
               <button
                 className="fullscreen-btn"
-                onClick={() => isFullscreen ? document.exitFullscreen() : document.documentElement.requestFullscreen?.()}
+                onClick={toggleFullscreen}
                 title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
               >
                 <kbd>F11</kbd>
@@ -147,19 +64,19 @@ export default function Home() {
                 {isFullscreen ? 'Exit fullscreen mode' : 'Enter fullscreen for best results'}
               </span>
             </div>
-            
-            <button 
+
+            <button
               className="repair-button"
               onClick={(e) => {
-                e.stopPropagation(); 
-                setIsRepairing(true);
+                e.stopPropagation();
+                startRepair();
               }}
             >
               Start Screen Repair
             </button>
 
             <div className="intensity-selector">
-              {(['low', 'medium', 'high'] as Intensity[]).map((level) => (
+              {INTENSITY_LEVELS.map((level) => (
                 <button
                   key={level}
                   className={`intensity-btn ${intensity === level ? 'active' : ''}`}
@@ -171,55 +88,17 @@ export default function Home() {
             </div>
 
             <div className="disclaimer">
-              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering. 
-              Do not look directly at the screen to avoid eye strain. 
+              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering.
+              Do not look directly at the screen to avoid eye strain.
               For best results, leave running in the background for 2-4 hours.
             </div>
           </div>
         </div>
 
-        {/* Taskbar (Bottom Left) */}
-        <div className={`taskbar ${isMinimized ? 'visible' : ''}`}>
-          <div className="taskbar-app" onClick={() => setIsMinimized(false)}>
-            <svg width="26" height="20" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 4h10v24H8z" fill="#fff" />
-              <path d="M8 4v24M18 4v24M8 4h10M8 28h10" stroke="#000" strokeWidth="2" />
-              <path d="M8 12h5v8H8z" fill="#000" />
-              <path d="M24 4h10v24H24z" fill="#fff" />
-              <path d="M24 4v24M34 4v24M24 4h10M24 28h10" stroke="#000" strokeWidth="2" />
-              <path d="M24 12h5v8H24z" fill="#000" />
-            </svg>
-            <span>Screen_Fixer.exe</span>
-          </div>
-        </div>
+        <Taskbar isVisible={isMinimized} title={APP_TITLE} onRestore={unminimize} />
 
-        {/* Recycle Bin (Bottom Middle) - Visible when trashed or restoring */}
         {(isTrashed || isRestoring) && (
-          <div className="recycle-bin full" onClick={handleRestore}>
-            <div className="trash-icon">
-              <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Trash Body (shifted +30x, +50y) */}
-                <g className="trash-body">
-                  <path d="M45 60h30v40H45V60z" fill="#4a4a4a" />
-                  <path d="M45 60v40M75 60v40M45 100h30" stroke="#000" strokeWidth="2" />
-                  <rect x="48" y="60" width="2" height="40" fill="#222" />
-                  <rect x="54" y="60" width="2" height="40" fill="#222" />
-                  <rect x="60" y="60" width="2" height="40" fill="#222" />
-                  <rect x="66" y="60" width="2" height="40" fill="#222" />
-                  <rect x="72" y="60" width="2" height="40" fill="#222" />
-                </g>
-                
-                {/* Trash Lid (shifted +30x, +50y, origin at 42 60) */}
-                <g key={isRestoring ? 'restoring' : 'idle'} className={`trash-lid${isRestoring ? ' restoring' : ''}`}>
-                  <path d="M42 55h36v5H42v-5z" fill="#333" />
-                  <path d="M42 55v5M78 55v5M42 55h36" stroke="#000" strokeWidth="2" />
-                  <rect x="52" y="50" width="16" height="5" fill="#4a4a4a" />
-                  <path d="M52 50v5M68 50v5M52 50h16" stroke="#000" strokeWidth="2" />
-                </g>
-              </svg>
-            </div>
-            <span className="bin-label">{isRestoring ? 'Restoring...' : '1 Item'}</span>
-          </div>
+          <RecycleBin isRestoring={isRestoring} onRestore={restore} />
         )}
       </main>
     </>
