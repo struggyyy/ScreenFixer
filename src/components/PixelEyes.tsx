@@ -12,6 +12,7 @@
  *                                                                         *
  ************************************************************************** */
 
+// Interface for the pixel-art eyes component.
 interface PixelEyesProps {
   // Width in px, height auto-scales to maintain the 42×32 viewBox ratio.
   width?: number;

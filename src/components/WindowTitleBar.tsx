@@ -12,6 +12,12 @@
  *                                                                         *
  ************************************************************************** */
 
+'use client';
+
+// External libraries
+import styled from 'styled-components';
+
+// Window control interfaces and styled components.
 interface WindowTitleBarProps {
   title: string;
   isMaximized: boolean;
@@ -20,7 +26,44 @@ interface WindowTitleBarProps {
   onClose: () => void;
 }
 
-// Title bar with app name and minimize / maximize / close controls.
+const TitleBar = styled.div`
+  background: ${({ theme }) => theme.colors.titleBarBg};
+  color: ${({ theme }) => theme.colors.titleBarText};
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  border-bottom: ${({ theme }) => theme.borders.window} solid ${({ theme }) =>
+  theme.colors.windowBorder};
+  user-select: none;
+`;
+
+const ControlsContainer = styled.div`
+  display: flex;
+  gap: 6px;
+`;
+
+const ControlDot = styled.div<{ $type?: 'close' | 'default' }>`
+  width: 16px;
+  height: 16px;
+  border: 2px solid ${({ theme }) => theme.colors.windowBorder};
+  background: ${({ $type, theme }) =>
+    $type === 'close' ? theme.colors.closeBtnBg : theme.colors.btnBg};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: ${({ theme }) => theme.colors.windowBorder};
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ $type, theme }) =>
+      $type === 'close' ? theme.colors.closeBtnHoverBg : theme.colors.btnHoverBg};
+  }
+`;
+
+// Title bar component with OS-style window controls (macOS/Windows hybrid style).
 export function WindowTitleBar({
   title,
   isMaximized,
@@ -29,33 +72,41 @@ export function WindowTitleBar({
   onClose,
 }: WindowTitleBarProps) {
   return (
-    <div className="window-title">
-      <span>{title}</span>
-      <div className="window-controls">
-        {/* Minimize */}
-        <div className="window-dot" onClick={onMinimize}>
-          <svg width="10" height="10" viewBox="0 0 10 10">
-            <rect x="1" y="7" width="8" height="2" fill="currentColor" />
+    <TitleBar>
+      <div className="window-title-text">{title}</div>
+      <ControlsContainer>
+        <ControlDot onClick={onMinimize}>
+          <svg width="12" height="12" viewBox="0 0 12 12">
+            <rect x="1" y="8" width="10" height="2" fill="currentColor" />
           </svg>
-        </div>
-
-        {/* Maximize / Restore */}
-        <div className="window-dot" onClick={onToggleMaximize}>
+        </ControlDot>
+        <ControlDot onClick={onToggleMaximize}>
           {isMaximized ? (
-            <svg width="10" height="10" viewBox="0 0 10 10">
-              <path
-                d="M3 1h6v6H3V1zM1 3h6v6H1V3z"
+            <svg width="12" height="12" viewBox="0 0 12 12">
+              <rect
+                x="3"
+                y="1"
+                width="7"
+                height="7"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1"
               />
-              <path d="M3 1h6M3 2h6M1 3h6M1 4h6" stroke="currentColor" strokeWidth="1" />
-            </svg>
-          ) : (
-            <svg width="10" height="10" viewBox="0 0 10 10">
               <rect
                 x="1"
-                y="1"
+                y="3"
+                width="7"
+                height="7"
+                fill="white"
+                stroke="currentColor"
+                strokeWidth="1"
+              />
+            </svg>
+          ) : (
+            <svg width="12" height="12" viewBox="0 0 12 12">
+              <rect
+                x="2"
+                y="2"
                 width="8"
                 height="8"
                 fill="none"
@@ -64,15 +115,18 @@ export function WindowTitleBar({
               />
             </svg>
           )}
-        </div>
-
-        {/* Close */}
-        <div className="window-dot window-dot-close" onClick={onClose}>
-          <svg width="10" height="10" viewBox="0 0 10 10">
-            <path d="M1 1l8 8M1 9l8-8" stroke="white" strokeWidth="2" />
+        </ControlDot>
+        <ControlDot $type="close" onClick={onClose}>
+          <svg width="12" height="12" viewBox="0 0 12 12">
+            <path
+              d="M2 2l8 8M2 10l8-8"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="square"
+            />
           </svg>
-        </div>
-      </div>
-    </div>
+        </ControlDot>
+      </ControlsContainer>
+    </TitleBar>
   );
 }

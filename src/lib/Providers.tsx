@@ -14,43 +14,23 @@
 
 'use client';
 
-// React-specific imports
-import { forwardRef } from 'react';
+// React-specific
+import React from 'react';
 
 // External libraries
-import styled from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
-interface RepairOverlayProps {
-  isRepairing: boolean;
+// Internal imports
+import { theme } from '@/theme/theme';
+import GlobalStyles from '@/theme/GlobalStyles';
+
+// Main providers wrapper for the App Router to maintain client-side context.
+
+export default function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      {children}
+    </ThemeProvider>
+  );
 }
-
-// Full-screen overlay used to cover the desktop during the repair sequence.
-const Overlay = styled.div<{ $isRepairing: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  transition: ${({ $isRepairing }) => ($isRepairing ? 'none' : 'opacity 1s ease')};
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-    background-size: 100% 4px;
-    opacity: 0.1;
-  }
-`;
-
-// Full-viewport overlay, forwardRef lets the RAF loop mutate backgroundColor without re-renders.
-export const RepairOverlay = forwardRef<HTMLDivElement, RepairOverlayProps>(
-  ({ isRepairing }, ref) => <Overlay ref={ref} $isRepairing={isRepairing} />,
-);
-
-RepairOverlay.displayName = 'RepairOverlay';

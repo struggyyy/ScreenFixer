@@ -12,36 +12,9 @@
  *                                                                         *
  ************************************************************************** */
 
-// External libraries
-import type { Metadata } from 'next';
-import { VT323 } from 'next/font/google';
-// Internal imports
-import StyledComponentsRegistry from '@/lib/registry';
-import Providers from '@/lib/Providers';
+import 'styled-components';
+import { AppTheme } from './theme';
 
-const vt323 = VT323({
-  weight: '400',
-  subsets: ['latin'],
-});
-
-export const metadata: Metadata = {
-  title: 'Screen Fixer | Retro Pixel Restoration',
-  description: 'Advanced display repair with a nostalgic 8-bit aesthetic.',
-};
-
-// Root layout defining the base structure and global font.
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={vt323.className}>
-        <StyledComponentsRegistry>
-          <Providers>{children}</Providers>
-        </StyledComponentsRegistry>
-      </body>
-    </html>
-  );
+declare module 'styled-components' {
+  export interface DefaultTheme extends AppTheme {}
 }

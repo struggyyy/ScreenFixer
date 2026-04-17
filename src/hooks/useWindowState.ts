@@ -48,9 +48,14 @@ export function useWindowState(): UseWindowStateReturn {
   const toggleMaximize = useCallback(() => setIsMaximized((prev) => !prev), []);
 
   const close = useCallback(() => {
-    setIsMaximized(false); // Snap out of maximized first so the crumble starts from centre.
-    setIsTrashed(true);
-  }, []);
+    if (isMaximized) {
+      setIsMaximized(false);
+      // Wait for the window transition (0.6s) before starting the crumble animation.
+      setTimeout(() => setIsTrashed(true), 600);
+    } else {
+      setIsTrashed(true);
+    }
+  }, [isMaximized]);
 
   const restore = useCallback(() => {
     setIsRestoring(true);
