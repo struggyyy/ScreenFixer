@@ -40,5 +40,17 @@ export function useFullscreen(): UseFullscreenReturn {
     }
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'F11') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleFullscreen]);
+
   return { isFullscreen, toggleFullscreen };
 }

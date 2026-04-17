@@ -79,6 +79,7 @@ export function useScreenRepair(): UseScreenRepairReturn {
         e.type === 'click' ||
         (e instanceof KeyboardEvent && (e.key === 'Escape' || e.key === ' '))
       ) {
+        if (e instanceof KeyboardEvent) e.preventDefault();
         stopRepair();
       }
     }
