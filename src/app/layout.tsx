@@ -12,8 +12,11 @@
  *                                                                         *
  ************************************************************************** */
 
+// External libraries
 import type { Metadata } from 'next';
 import { VT323 } from 'next/font/google';
+
+// Internal imports
 import './globals.css';
 
 const vt323 = VT323({

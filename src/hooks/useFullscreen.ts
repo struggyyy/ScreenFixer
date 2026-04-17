@@ -14,6 +14,7 @@
 
 'use client';
 
+// React-specific imports
 import { useState, useEffect, useCallback } from 'react';
 
 interface UseFullscreenReturn {

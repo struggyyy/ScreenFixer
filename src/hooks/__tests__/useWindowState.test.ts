@@ -12,7 +12,10 @@
  *                                                                         *
  ************************************************************************** */
 
+// External libraries
 import { act, renderHook } from '@testing-library/react';
+
+// Internal imports
 import { useWindowState } from '@/hooks/useWindowState';
 
 describe('useWindowState', () => {

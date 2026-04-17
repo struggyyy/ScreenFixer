@@ -12,6 +12,7 @@
  *                                                                         *
  ************************************************************************** */
 
+// React-specific imports
 import { forwardRef } from 'react';
 
 interface RepairOverlayProps {

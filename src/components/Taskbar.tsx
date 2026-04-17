@@ -12,6 +12,7 @@
  *                                                                         *
  ************************************************************************** */
 
+// Internal imports
 import { PixelEyes } from './PixelEyes';
 
 interface TaskbarProps {

@@ -14,6 +14,7 @@
 
 'use client';
 
+// React-specific imports
 import { useState, useCallback } from 'react';
 
 export interface WindowState {

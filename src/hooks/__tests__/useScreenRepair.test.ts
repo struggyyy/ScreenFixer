@@ -12,7 +12,10 @@
  *                                                                         *
  ************************************************************************** */
 
+// External libraries
 import { act, renderHook } from '@testing-library/react';
+
+// Internal imports
 import { useScreenRepair, INTENSITY_MAP } from '@/hooks/useScreenRepair';
 
 // RAF is not available in jsdom — mock it so animation loops don't hang.

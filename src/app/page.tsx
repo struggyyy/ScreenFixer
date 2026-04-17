@@ -14,10 +14,10 @@
 
 'use client';
 
+// Internal imports
 import { type Intensity, useScreenRepair } from '@/hooks/useScreenRepair';
 import { useFullscreen } from '@/hooks/useFullscreen';
 import { useWindowState } from '@/hooks/useWindowState';
-
 import { RepairOverlay } from '@/components/RepairOverlay';
 import { WindowTitleBar } from '@/components/WindowTitleBar';
 import { PixelEyes } from '@/components/PixelEyes';

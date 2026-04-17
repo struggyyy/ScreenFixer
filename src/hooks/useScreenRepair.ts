@@ -14,6 +14,7 @@
 
 'use client';
 
+// React-specific imports
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 export type Intensity = 'low' | 'medium' | 'high';
