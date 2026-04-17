@@ -21,8 +21,8 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 // Internal imports
-import { theme } from '@/theme/theme';
-import GlobalStyles from '@/theme/GlobalStyles';
+import { theme } from '@/components/ui/theme/theme';
+import GlobalStyles from '@/components/theme/GlobalStyles';
 
 // Main providers wrapper for the App Router to maintain client-side context.
 

@@ -18,7 +18,7 @@
 import styled from 'styled-components';
 
 // Internal imports
-import { PixelEyes } from './PixelEyes';
+import { PixelEyes } from '@/components/common/PixelEyes';
 
 interface TaskbarProps {
   isVisible: boolean;

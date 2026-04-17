@@ -18,7 +18,7 @@
 import styled, { css } from 'styled-components';
 
 // Internal imports
-import { binBounce, binPopIn, lidPop } from '@/theme/GlobalStyles';
+import { binBounce, binPopIn, lidPop } from '@/components/theme/GlobalStyles';
 
 interface RecycleBinProps {
   isRestoring: boolean;
@@ -37,8 +37,8 @@ const BinContainer = styled.div<{ $isFull?: boolean }>`
   gap: ${({ theme }) => theme.spacing.sm};
   cursor: pointer;
   z-index: 100;
-  animation: ${binPopIn} ${({ theme }) => theme.anim.durations.long} ${({ theme }) =>
-  theme.anim.easings.bounce};
+  animation: ${binPopIn} ${({ theme }) => theme.anim.durations.long}
+    ${({ theme }) => theme.anim.easings.bounce};
 
   &:hover {
     transform: translateX(-50%) translateY(-5px);
@@ -49,14 +49,15 @@ const BinContainer = styled.div<{ $isFull?: boolean }>`
     css`
       animation:
         ${binPopIn} ${theme.anim.durations.long} ${theme.anim.easings.bounce},
-        ${binBounce} ${theme.anim.durations.slow} ${theme.anim.easings.bounce} ${theme.anim.durations.crumble};
+        ${binBounce} ${theme.anim.durations.slow} ${theme.anim.easings.bounce}
+          ${theme.anim.durations.crumble};
     `}
 `;
 
 const TrashLid = styled.g<{ $isRestoring: boolean }>`
   transform-origin: 42px 60px;
-  animation: ${lidPop} ${({ theme }) => theme.anim.durations.crumble} ${({ theme }) =>
-  theme.anim.easings.standard}
+  animation: ${lidPop} ${({ theme }) => theme.anim.durations.crumble}
+    ${({ theme }) => theme.anim.easings.standard}
     ${({ $isRestoring }) => ($isRestoring ? '0s' : '0.5s')};
 `;
 
