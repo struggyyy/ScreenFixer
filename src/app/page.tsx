@@ -14,21 +14,20 @@
 
 'use client';
 
+// React-specific imports
+import React from 'react';
+
 // External libraries
 import styled from 'styled-components';
 
-// Internal hooks
+// Internal imports
 import { type Intensity, useScreenRepair } from '@/hooks/useScreenRepair';
 import { useFullscreen } from '@/hooks/useFullscreen';
 import { useWindowState } from '@/hooks/useWindowState';
-
-// Internal components (Features)
 import { RepairOverlay } from '@/components/features/RepairOverlay';
 import { WindowTitleBar } from '@/components/features/WindowTitleBar';
 import { Taskbar } from '@/components/features/Taskbar';
 import { RecycleBin } from '@/components/features/RecycleBin';
-
-// Internal components (Common)
 import { PixelEyes } from '@/components/common/PixelEyes';
 import { Button } from '@/components/common/Button';
 import { Disclaimer } from '@/components/common/Disclaimer';

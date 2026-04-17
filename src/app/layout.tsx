@@ -12,9 +12,13 @@
  *                                                                         *
  ************************************************************************** */
 
+// React-specific imports
+import React from 'react';
+
 // External libraries
 import type { Metadata } from 'next';
 import { VT323 } from 'next/font/google';
+
 // Internal imports
 import StyledComponentsRegistry from '@/lib/registry';
 import Providers from '@/lib/Providers';

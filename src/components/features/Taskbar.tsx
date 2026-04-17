@@ -37,14 +37,13 @@ const TaskbarContainer = styled.div<{ $isVisible: boolean }>`
   pointer-events: ${({ $isVisible }) => ($isVisible ? 'auto' : 'none')};
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   transform: translateY(${({ $isVisible }) => ($isVisible ? '0' : '20px')});
-  transition: all ${({ theme }) => theme.anim.durations.slow} ${({ theme }) =>
-  theme.anim.easings.standard};
+  transition: all ${({ theme }) => theme.anim.durations.slow}
+    ${({ theme }) => theme.anim.easings.standard};
 `;
 
 const AppChip = styled.div`
   background: ${({ theme }) => theme.colors.btnBg};
-  border: ${({ theme }) => theme.borders.btn} solid ${({ theme }) =>
-  theme.colors.windowBorder};
+  border: ${({ theme }) => theme.borders.btn} solid ${({ theme }) => theme.colors.windowBorder};
   box-shadow:
     inset -2px -2px 0px ${({ theme }) => theme.colors.btnShadow},
     ${({ theme }) => theme.shadows.btn};
@@ -55,8 +54,7 @@ const AppChip = styled.div`
   font-size: 0.9rem;
   cursor: pointer;
   transition:
-    transform ${({ theme }) => theme.anim.durations.md} ${({ theme }) =>
-  theme.anim.easings.bounce},
+    transform ${({ theme }) => theme.anim.durations.md} ${({ theme }) => theme.anim.easings.bounce},
     background ${({ theme }) => theme.anim.durations.md},
     box-shadow ${({ theme }) => theme.anim.durations.md};
   color: ${({ theme }) => theme.colors.windowBorder};

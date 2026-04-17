@@ -1,7 +1,26 @@
+/** *************************************************************************
+ *                                                                         *
+ *                       Copyright (c) 2026, @struggyyy                    *
+ *                                                                         *
+ *                          Project: ScreenFixer                           *
+ *                                                                         *
+ *                           All Rights Reserved                           *
+ *                                                                         *
+ *        This is unpublished proprietary source code of @struggyyy.       *
+ *         The copyright notice above does not evidence any actual         *
+ *               or intended publication of such source code.              *
+ *                                                                         *
+ ************************************************************************** */
+
 'use client';
 
+// React-specific imports
 import React from 'react';
+
+// External libraries
 import styled, { css } from 'styled-components';
+
+// Internal imports
 import { windowCrumble, windowUncrumble } from '@/components/theme/GlobalStyles';
 
 interface AnimatedWindowProps {
@@ -110,6 +129,7 @@ export function AnimatedWindow({
   );
 }
 
+// Window content container wrapper
 export function WindowContent({ children }: { children: React.ReactNode }) {
   return <StyledWindowContent>{children}</StyledWindowContent>;
 }

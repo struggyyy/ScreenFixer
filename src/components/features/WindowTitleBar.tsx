@@ -34,8 +34,8 @@ const TitleBar = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
-  border-bottom: ${({ theme }) => theme.borders.window} solid ${({ theme }) =>
-  theme.colors.windowBorder};
+  border-bottom: ${({ theme }) => theme.borders.window} solid
+    ${({ theme }) => theme.colors.windowBorder};
   user-select: none;
 `;
 
@@ -118,12 +118,7 @@ export function WindowTitleBar({
         </ControlDot>
         <ControlDot $type="close" onClick={onClose}>
           <svg width="12" height="12" viewBox="0 0 12 12">
-            <path
-              d="M2 2l8 8M2 10l8-8"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="square"
-            />
+            <path d="M2 2l8 8M2 10l8-8" stroke="white" strokeWidth="2" strokeLinecap="square" />
           </svg>
         </ControlDot>
       </ControlsContainer>

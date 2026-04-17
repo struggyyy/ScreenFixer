@@ -12,7 +12,10 @@
  *                                                                         *
  ************************************************************************** */
 
+// External libraries
 import 'styled-components';
+
+// Internal imports
 import { AppTheme } from './theme';
 
 declare module 'styled-components' {

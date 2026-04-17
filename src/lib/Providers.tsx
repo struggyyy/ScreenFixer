@@ -14,14 +14,14 @@
 
 'use client';
 
-// React-specific
+// React-specific imports
 import React from 'react';
 
 // External libraries
 import { ThemeProvider } from 'styled-components';
 
 // Internal imports
-import { theme } from '@/components/ui/theme/theme';
+import { theme } from '@/components/theme/theme';
 import GlobalStyles from '@/components/theme/GlobalStyles';
 
 // Main providers wrapper for the App Router to maintain client-side context.
