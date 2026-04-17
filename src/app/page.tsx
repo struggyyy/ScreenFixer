@@ -62,6 +62,7 @@ const Window = styled.div<{
       opacity: 0;
       transform: translate(-50%, -50%) translateY(40px) scale(0.95);
       pointer-events: none;
+      z-index: 10001;
     `}
 
   ${({ $isMinimized }) =>

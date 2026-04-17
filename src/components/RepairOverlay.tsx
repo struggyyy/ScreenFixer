@@ -31,9 +31,11 @@ const Overlay = styled.div<{ $isRepairing: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  transition: ${({ $isRepairing }) => ($isRepairing ? 'none' : 'opacity 1s ease')};
+  z-index: 9999;
+  pointer-events: ${({ $isRepairing }) => ($isRepairing ? 'auto' : 'none')};
+  cursor: ${({ $isRepairing }) => ($isRepairing ? 'none' : 'default')};
+  opacity: ${({ $isRepairing }) => ($isRepairing ? 1 : 0)};
+  transition: opacity ${({ theme }) => theme.anim.durations.window} ease;
 
   &::after {
     content: '';
