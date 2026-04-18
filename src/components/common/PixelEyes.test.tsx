@@ -13,27 +13,25 @@
  ************************************************************************** */
 
 // External libraries
-import type { Config } from 'jest';
-import nextJest from 'next/jest.js';
+import React from 'react';
+import { render } from '@testing-library/react';
 
-const createJestConfig = nextJest({
-  // Points to your Next.js app root so next.config.ts and .env files are loaded
-  dir: './',
+// Internal imports
+import { PixelEyes } from './PixelEyes';
+
+describe('PixelEyes', () => {
+  it('renders correctly with default width', () => {
+    const { container } = render(<PixelEyes />);
+    const svg = container.querySelector('svg');
+    expect(svg).toBeInTheDocument();
+    expect(svg).toHaveAttribute('width', '84');
+    expect(svg).toHaveAttribute('height', '64'); // (84/42)*32
+  });
+
+  it('renders with custom width', () => {
+    const { container } = render(<PixelEyes width={42} />);
+    const svg = container.querySelector('svg');
+    expect(svg).toHaveAttribute('width', '42');
+    expect(svg).toHaveAttribute('height', '32');
+  });
 });
-
-const config: Config = {
-  displayName: 'ScreenFixer',
-  testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
-  testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.{ts,tsx}',
-    '<rootDir>/src/**/*.{spec,test}.{ts,tsx}',
-  ],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],
-  coverageReporters: ['text', 'lcov', 'html'],
-};
-
-export default createJestConfig(config);

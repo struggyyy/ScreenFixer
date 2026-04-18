@@ -77,7 +77,7 @@ const AppChip = styled.div`
 export function Taskbar({ isVisible, title, onRestore }: TaskbarProps) {
   return (
     <TaskbarContainer $isVisible={isVisible}>
-      <AppChip onClick={onRestore}>
+      <AppChip onClick={onRestore} data-testid="taskbar-chip">
         <PixelEyes width={26} />
         <span>{title}</span>
       </AppChip>

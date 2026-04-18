@@ -13,27 +13,21 @@
  ************************************************************************** */
 
 // External libraries
-import type { Config } from 'jest';
-import nextJest from 'next/jest.js';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
 
-const createJestConfig = nextJest({
-  // Points to your Next.js app root so next.config.ts and .env files are loaded
-  dir: './',
-});
+// Internal imports
+import { Disclaimer } from './Disclaimer';
+import { theme } from '../theme/theme';
 
-const config: Config = {
-  displayName: 'ScreenFixer',
-  testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
-  testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.{ts,tsx}',
-    '<rootDir>/src/**/*.{spec,test}.{ts,tsx}',
-  ],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],
-  coverageReporters: ['text', 'lcov', 'html'],
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>);
 };
 
-export default createJestConfig(config);
+describe('Disclaimer', () => {
+  it('renders children correctly', () => {
+    renderWithTheme(<Disclaimer>Safety First</Disclaimer>);
+    expect(screen.getByText('Safety First')).toBeInTheDocument();
+  });
+});

@@ -75,12 +75,12 @@ export function WindowTitleBar({
     <TitleBar>
       <div className="window-title-text">{title}</div>
       <ControlsContainer>
-        <ControlDot onClick={onMinimize}>
+        <ControlDot onClick={onMinimize} data-testid="minimize-button">
           <svg width="12" height="12" viewBox="0 0 12 12">
             <rect x="1" y="8" width="10" height="2" fill="currentColor" />
           </svg>
         </ControlDot>
-        <ControlDot onClick={onToggleMaximize}>
+        <ControlDot onClick={onToggleMaximize} data-testid="maximize-button">
           {isMaximized ? (
             <svg width="12" height="12" viewBox="0 0 12 12">
               <rect
@@ -116,7 +116,7 @@ export function WindowTitleBar({
             </svg>
           )}
         </ControlDot>
-        <ControlDot $type="close" onClick={onClose}>
+        <ControlDot $type="close" onClick={onClose} data-testid="close-button">
           <svg width="12" height="12" viewBox="0 0 12 12">
             <path d="M2 2l8 8M2 10l8-8" stroke="white" strokeWidth="2" strokeLinecap="square" />
           </svg>
