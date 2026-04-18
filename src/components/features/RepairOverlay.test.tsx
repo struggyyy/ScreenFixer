@@ -41,7 +41,7 @@ describe('RepairOverlay', () => {
     rerender(
       <ThemeProvider theme={theme}>
         <RepairOverlay isRepairing={true} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     overlay = container.firstChild as HTMLElement;
     // pointer-events: auto, opacity: 1

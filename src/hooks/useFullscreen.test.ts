@@ -77,8 +77,7 @@ describe('useFullscreen', () => {
   });
 
   it('calls toggleFullscreen when F11 is pressed', () => {
-    const { result } = renderHook(() => useFullscreen());
-    const toggleFullscreenSpy = jest.spyOn(result.current, 'toggleFullscreen');
+    renderHook(() => useFullscreen());
 
     // Note: We can't spy on the returned function easily because it's stable via useCallback.
     // Instead we check the side effect (requestFullscreen/exitFullscreen)

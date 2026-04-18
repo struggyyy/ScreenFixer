@@ -24,7 +24,7 @@ describe('Providers', () => {
     render(
       <Providers>
         <div data-testid="child">Test Child</div>
-      </Providers>
+      </Providers>,
     );
     expect(screen.getByTestId('child')).toBeInTheDocument();
   });

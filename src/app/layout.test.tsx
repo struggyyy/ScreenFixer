@@ -48,7 +48,7 @@ describe('RootLayout', () => {
       if (typeof msg === 'string' && msg.includes('In HTML, <html> cannot be a child of <div>')) {
         return;
       }
-      // Log other errors to the actual console during tests if needed, 
+      // Log other errors to the actual console during tests if needed,
       // but usually we just want to suppress the known one.
     });
   });
@@ -61,7 +61,7 @@ describe('RootLayout', () => {
     render(
       <RootLayout>
         <div data-testid="test-child">Child Content</div>
-      </RootLayout>
+      </RootLayout>,
     );
 
     expect(screen.getByTestId('registry')).toBeInTheDocument();

@@ -154,7 +154,7 @@ describe('useScreenRepair', () => {
     act(() => result.current.startRepair());
     expect(mockRaf).toHaveBeenCalled();
 
-    act(() => result.current.bgRef.current = div); // ensure ref is there
+    act(() => (result.current.bgRef.current = div)); // ensure ref is there
 
     unmount();
     expect(mockCaf).toHaveBeenCalledWith(123);
@@ -168,4 +168,3 @@ describe('useScreenRepair', () => {
     expect(div.style.backgroundColor).toBe('transparent');
   });
 });
-

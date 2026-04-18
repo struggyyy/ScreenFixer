@@ -38,7 +38,7 @@ describe('AnimatedWindow', () => {
     renderWithTheme(
       <AnimatedWindow {...defaultProps}>
         <div data-testid="child">Hello</div>
-      </AnimatedWindow>
+      </AnimatedWindow>,
     );
     expect(screen.getByTestId('child')).toBeInTheDocument();
   });
@@ -47,7 +47,7 @@ describe('AnimatedWindow', () => {
     const { rerender } = renderWithTheme(
       <AnimatedWindow {...defaultProps} isMinimized={true}>
         Content
-      </AnimatedWindow>
+      </AnimatedWindow>,
     );
     expect(screen.getByText('Content')).toBeInTheDocument();
 
@@ -56,7 +56,7 @@ describe('AnimatedWindow', () => {
         <AnimatedWindow {...defaultProps} isMaximized={true}>
           Content
         </AnimatedWindow>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText('Content')).toBeInTheDocument();
 
@@ -65,7 +65,7 @@ describe('AnimatedWindow', () => {
         <AnimatedWindow {...defaultProps} isTrashed={true}>
           Content
         </AnimatedWindow>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText('Content')).toBeInTheDocument();
 
@@ -74,7 +74,7 @@ describe('AnimatedWindow', () => {
         <AnimatedWindow {...defaultProps} isRestoring={true}>
           Content
         </AnimatedWindow>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText('Content')).toBeInTheDocument();
 
@@ -83,7 +83,7 @@ describe('AnimatedWindow', () => {
         <AnimatedWindow {...defaultProps} isHidden={true}>
           Content
         </AnimatedWindow>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
@@ -93,7 +93,7 @@ describe('AnimatedWindow', () => {
       renderWithTheme(
         <WindowContent>
           <span>Inside Content</span>
-        </WindowContent>
+        </WindowContent>,
       );
       expect(screen.getByText('Inside Content')).toBeInTheDocument();
     });

@@ -29,7 +29,7 @@ describe('StyledComponentsRegistry', () => {
     const { getByText } = render(
       <StyledComponentsRegistry>
         <div>Registry Child</div>
-      </StyledComponentsRegistry>
+      </StyledComponentsRegistry>,
     );
     expect(getByText('Registry Child')).toBeInTheDocument();
   });

@@ -52,14 +52,14 @@ describe('Button', () => {
     rerender(
       <ThemeProvider theme={theme}>
         <Button variant="fullscreen">Fullscreen</Button>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText('Fullscreen')).toBeInTheDocument();
 
     rerender(
       <ThemeProvider theme={theme}>
         <Button variant="intensity">Intensity</Button>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText('Intensity')).toBeInTheDocument();
   });
@@ -68,7 +68,7 @@ describe('Button', () => {
     const { container } = renderWithTheme(
       <Button variant="intensity" $isActive={true}>
         Active
-      </Button>
+      </Button>,
     );
     const button = container.firstChild as HTMLElement;
     expect(button).toBeInTheDocument();
@@ -80,7 +80,7 @@ describe('Button', () => {
     renderWithTheme(
       <Button disabled data-testid="test-button">
         Disabled
-      </Button>
+      </Button>,
     );
     const button = screen.getByTestId('test-button');
     expect(button).toBeDisabled();

@@ -164,5 +164,3 @@ export const GlobalStyles = createGlobalStyle`
     opacity: 0.1;
   }
 `;
-
-

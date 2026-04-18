@@ -26,7 +26,7 @@ describe('GlobalStyles', () => {
     render(
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     // If it didn't throw, it successfully accessed the theme properties
     expect(true).toBe(true);

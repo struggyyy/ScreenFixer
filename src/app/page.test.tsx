@@ -25,7 +25,7 @@ import { theme } from '@/components/theme/theme';
 beforeAll(() => {
   global.requestAnimationFrame = jest.fn((cb) => setTimeout(cb, 0));
   global.cancelAnimationFrame = jest.fn((id) => clearTimeout(id));
-  
+
   Object.defineProperty(document, 'fullscreenElement', {
     writable: true,
     value: null,
@@ -64,13 +64,13 @@ describe('Home Page', () => {
 
   it('minimizes and restores the window', () => {
     renderWithTheme(<Home />);
-    
+
     // Find minimize button
     fireEvent.click(screen.getByTestId('minimize-button'));
-    
+
     // Taskbar should be visible
     expect(screen.getByTestId('taskbar-chip')).toBeInTheDocument();
-    
+
     // Clicking taskbar should restore
     fireEvent.click(screen.getByTestId('taskbar-chip'));
     // Flow completed
@@ -85,22 +85,22 @@ describe('Home Page', () => {
   it('closes and restores via recycle bin', () => {
     jest.useFakeTimers();
     renderWithTheme(<Home />);
-    
+
     fireEvent.click(screen.getByTestId('close-button')); // close
-    
+
     act(() => {
       jest.advanceTimersByTime(600);
     });
-    
+
     // Recycle bin should be visible
     expect(screen.getByText('1 Item')).toBeInTheDocument();
-    
+
     fireEvent.click(screen.getByText('1 Item')); // restore
-    
+
     act(() => {
       jest.advanceTimersByTime(1200);
     });
-    
+
     jest.useRealTimers();
   });
 });

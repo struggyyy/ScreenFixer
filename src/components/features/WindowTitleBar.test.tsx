@@ -65,7 +65,7 @@ describe('WindowTitleBar', () => {
     rerender(
       <ThemeProvider theme={theme}>
         <WindowTitleBar {...defaultProps} isMaximized={true} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText('Test Window')).toBeInTheDocument();
   });
