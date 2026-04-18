@@ -16,7 +16,7 @@
 import { act, renderHook } from '@testing-library/react';
 
 // Internal imports
-import { useWindowState } from '@/hooks/useWindowState';
+import { useWindowState } from './useWindowState';
 
 describe('useWindowState', () => {
   it('initialises with all states false', () => {
@@ -50,13 +50,20 @@ describe('useWindowState', () => {
   });
 
   it('close sets isTrashed and clears isMaximized', () => {
+    jest.useFakeTimers();
     const { result } = renderHook(() => useWindowState());
 
     act(() => result.current.toggleMaximize()); // maximize first
     act(() => result.current.close());
 
-    expect(result.current.windowState.isTrashed).toBe(true);
     expect(result.current.windowState.isMaximized).toBe(false);
+    // Should still be false because of the 600ms delay
+    expect(result.current.windowState.isTrashed).toBe(false);
+
+    act(() => jest.advanceTimersByTime(600));
+    expect(result.current.windowState.isTrashed).toBe(true);
+
+    jest.useRealTimers();
   });
 
   it('restore sets isRestoring and clears isTrashed immediately', () => {
