@@ -20,8 +20,8 @@ import type { Metadata } from 'next';
 import { VT323 } from 'next/font/google';
 
 // Internal imports
-import StyledComponentsRegistry from '@/lib/registry';
-import Providers from '@/lib/Providers';
+import { StyledComponentsRegistry } from '@/lib/StyledComponentsRegistry';
+import { Providers } from '@/lib/Providers';
 
 const vt323 = VT323({
   weight: '400',

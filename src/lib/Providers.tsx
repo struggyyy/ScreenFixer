@@ -22,11 +22,11 @@ import { ThemeProvider } from 'styled-components';
 
 // Internal imports
 import { theme } from '@/components/theme/theme';
-import GlobalStyles from '@/components/theme/GlobalStyles';
+import { GlobalStyles } from '@/components/theme/GlobalStyles';
 
 // Main providers wrapper for the App Router to maintain client-side context.
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />

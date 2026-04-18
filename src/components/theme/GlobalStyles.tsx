@@ -115,7 +115,7 @@ export const lidPop = keyframes`
 `;
 
 // Global CSS reset and base layout styles.
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
     padding: 0;
@@ -165,4 +165,4 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default GlobalStyles;
+
