@@ -23,25 +23,20 @@ export const windowCrumble = keyframes`
     transform: translate(-50%, -50%) scale(1) rotate(0);
     opacity: 1;
   }
-  20% {
-    transform: translate(-52%, -58%) scale(0.6) rotate(10deg) skew(15deg, -5deg);
-  }
-  40% {
-    transform: translate(-48%, -50%) scale(0.3) rotate(-20deg) skew(-20deg, 10deg);
-  }
-  60% {
-    transform: translate(-50%, -10vh) scale(0.1) rotate(45deg) skew(30deg, 20deg);
-  }
-  78% {
-    transform: translate(-50%, 2vh) scale(0.02) rotate(360deg);
+  25% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(5deg);
     opacity: 1;
   }
-  84% {
-    transform: translate(-50%, 5vh) scale(0.01) rotate(400deg);
-    opacity: 0;
+  50% {
+    transform: translate(-50%, -50%) translateY(-2vh) scale(0.25) rotate(-5deg);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(15vh) scale(0.12) rotate(180deg);
+    opacity: 1;
   }
   100% {
-    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+    transform: translate(-50%, -50%) translateY(calc(50vh - 100px)) scale(0) rotate(360deg);
     opacity: 0;
   }
 `;
@@ -52,25 +47,20 @@ export const windowUncrumble = keyframes`
     transform: translate(-50%, -50%) scale(1) rotate(0);
     opacity: 1;
   }
-  20% {
-    transform: translate(-52%, -58%) scale(0.6) rotate(10deg) skew(15deg, -5deg);
-  }
-  40% {
-    transform: translate(-48%, -50%) scale(0.3) rotate(-20deg) skew(-20deg, 10deg);
-  }
-  60% {
-    transform: translate(-50%, -10vh) scale(0.1) rotate(45deg) skew(30deg, 20deg);
-  }
-  78% {
-    transform: translate(-50%, 2vh) scale(0.02) rotate(360deg);
+  25% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(5deg);
     opacity: 1;
   }
-  84% {
-    transform: translate(-50%, 5vh) scale(0.01) rotate(400deg);
-    opacity: 0;
+  50% {
+    transform: translate(-50%, -50%) translateY(-2vh) scale(0.25) rotate(-5deg);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(15vh) scale(0.12) rotate(180deg);
+    opacity: 1;
   }
   100% {
-    transform: translate(-50%, calc(50vh - 280px)) scale(0) rotate(720deg);
+    transform: translate(-50%, -50%) translateY(calc(50vh - 100px)) scale(0) rotate(360deg);
     opacity: 0;
   }
 `;
@@ -136,6 +126,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   main {
+    position: relative;
+    width: 100%;
+    height: 100%;
     z-index: 10;
     display: flex;
     flex-direction: column;
