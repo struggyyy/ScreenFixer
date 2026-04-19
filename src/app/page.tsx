@@ -42,6 +42,12 @@ const FullscreenHintRow = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
+  max-width: 100%;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
 const FullscreenHintText = styled.span`
@@ -49,6 +55,13 @@ const FullscreenHintText = styled.span`
   color: ${({ theme }) => theme.colors.fullscreenText};
   letter-spacing: 0.04em;
   text-transform: uppercase;
+
+  @media (max-width: 480px) {
+    font-size: 0.72rem;
+    max-width: 160px;
+    line-height: 1.1;
+    text-align: left;
+  }
 `;
 
 const IntensitySelector = styled.div`

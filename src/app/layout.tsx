@@ -30,7 +30,35 @@ const vt323 = VT323({
 
 export const metadata: Metadata = {
   title: 'Screen Fixer | Retro Pixel Restoration',
-  description: 'Advanced display repair with a nostalgic 8-bit aesthetic.',
+  description:
+    'Advanced display repair with a nostalgic 8-bit aesthetic. Fix stuck pixels and image retention.',
+  keywords: ['screen repair', 'stuck pixel fixer', 'dead pixel', 'image retention', 'retro ui'],
+  authors: [{ name: '@struggyyy' }],
+  openGraph: {
+    title: 'Screen Fixer | Retro Pixel Restoration',
+    description: 'Advanced display repair with a nostalgic 8-bit aesthetic.',
+    url: 'https://screenfixer.vercel.app', // Representative URL
+    siteName: 'Screen Fixer',
+    images: [
+      {
+        url: '/favicon.ico', // Use favicon as temporary logo as requested
+        width: 32,
+        height: 32,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Screen Fixer | Retro Pixel Restoration',
+    description: 'Advanced display repair with a nostalgic 8-bit aesthetic.',
+    images: ['/favicon.ico'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 // Root layout defining the base structure and global font.

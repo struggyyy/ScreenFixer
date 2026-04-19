@@ -41,7 +41,7 @@ const TaskbarContainer = styled.div<{ $isVisible: boolean }>`
     ${({ theme }) => theme.anim.easings.standard};
 `;
 
-const AppChip = styled.div`
+const AppChip = styled.button`
   background: ${({ theme }) => theme.colors.btnBg};
   border: ${({ theme }) => theme.borders.btn} solid ${({ theme }) => theme.colors.windowBorder};
   box-shadow:
@@ -59,6 +59,8 @@ const AppChip = styled.div`
     box-shadow ${({ theme }) => theme.anim.durations.md};
   color: ${({ theme }) => theme.colors.windowBorder};
   overflow: visible;
+  font-family: inherit;
+  outline: none;
 
   &:hover {
     background: ${({ theme }) => theme.colors.btnHoverBg};
@@ -71,13 +73,24 @@ const AppChip = styled.div`
   &:active {
     box-shadow: inset 2px 2px 0px ${({ theme }) => theme.colors.btnShadow};
   }
+
+  &:focus-visible {
+    box-shadow:
+      inset -2px -2px 0px ${({ theme }) => theme.colors.btnShadow},
+      0 0 0 2px ${({ theme }) => theme.colors.fullscreenText};
+  }
 `;
 
 // Bottom-left chip shown when minimized, click to restore the window.
 export function Taskbar({ isVisible, title, onRestore }: TaskbarProps) {
   return (
     <TaskbarContainer $isVisible={isVisible}>
-      <AppChip onClick={onRestore} data-testid="taskbar-chip">
+      <AppChip
+        onClick={onRestore}
+        data-testid="taskbar-chip"
+        type="button"
+        aria-label={`Restore window: ${title}`}
+      >
         <PixelEyes width={26} />
         <span>{title}</span>
       </AppChip>

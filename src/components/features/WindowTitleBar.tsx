@@ -21,8 +21,8 @@ import styled from 'styled-components';
 interface WindowTitleBarProps {
   title: string;
   isMaximized: boolean;
-  onMinimize: () => void;
-  onToggleMaximize: () => void;
+  onMinimize?: () => void;
+  onToggleMaximize?: () => void;
   onClose: () => void;
 }
 
@@ -44,7 +44,7 @@ const ControlsContainer = styled.div`
   gap: 6px;
 `;
 
-const ControlDot = styled.div<{ $type?: 'close' | 'default' }>`
+const ControlDot = styled.button<{ $type?: 'close' | 'default' }>`
   width: 16px;
   height: 16px;
   border: 2px solid ${({ theme }) => theme.colors.windowBorder};
@@ -53,13 +53,22 @@ const ControlDot = styled.div<{ $type?: 'close' | 'default' }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  padding: 0;
+  margin: 0;
   color: ${({ theme }) => theme.colors.windowBorder};
   cursor: pointer;
+  outline: none;
+  box-sizing: content-box;
+  flex-shrink: 0;
+  transition: background ${({ theme }) => theme.anim.durations.short};
 
   &:hover {
     background: ${({ $type, theme }) =>
       $type === 'close' ? theme.colors.closeBtnHoverBg : theme.colors.btnHoverBg};
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.fullscreenText};
   }
 `;
 
@@ -75,48 +84,68 @@ export function WindowTitleBar({
     <TitleBar>
       <div className="window-title-text">{title}</div>
       <ControlsContainer>
-        <ControlDot onClick={onMinimize} data-testid="minimize-button">
-          <svg width="12" height="12" viewBox="0 0 12 12">
-            <rect x="1" y="8" width="10" height="2" fill="currentColor" />
-          </svg>
-        </ControlDot>
-        <ControlDot onClick={onToggleMaximize} data-testid="maximize-button">
-          {isMaximized ? (
+        {onMinimize && (
+          <ControlDot
+            type="button"
+            onClick={onMinimize}
+            data-testid="minimize-button"
+            aria-label="Minimize window"
+          >
             <svg width="12" height="12" viewBox="0 0 12 12">
-              <rect
-                x="3"
-                y="1"
-                width="7"
-                height="7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-              <rect
-                x="1"
-                y="3"
-                width="7"
-                height="7"
-                fill="white"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
+              <rect x="1" y="8" width="10" height="2" fill="currentColor" />
             </svg>
-          ) : (
-            <svg width="12" height="12" viewBox="0 0 12 12">
-              <rect
-                x="2"
-                y="2"
-                width="8"
-                height="8"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-            </svg>
-          )}
-        </ControlDot>
-        <ControlDot $type="close" onClick={onClose} data-testid="close-button">
+          </ControlDot>
+        )}
+        {onToggleMaximize && (
+          <ControlDot
+            type="button"
+            onClick={onToggleMaximize}
+            data-testid="maximize-button"
+            aria-label={isMaximized ? 'Restore window size' : 'Maximize window'}
+          >
+            {isMaximized ? (
+              <svg width="12" height="12" viewBox="0 0 12 12">
+                <rect
+                  x="3"
+                  y="1"
+                  width="7"
+                  height="7"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+                <rect
+                  x="1"
+                  y="3"
+                  width="7"
+                  height="7"
+                  fill="white"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+              </svg>
+            ) : (
+              <svg width="12" height="12" viewBox="0 0 12 12">
+                <rect
+                  x="2"
+                  y="2"
+                  width="8"
+                  height="8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            )}
+          </ControlDot>
+        )}
+        <ControlDot
+          $type="close"
+          type="button"
+          onClick={onClose}
+          data-testid="close-button"
+          aria-label="Close window"
+        >
           <svg width="12" height="12" viewBox="0 0 12 12">
             <path d="M2 2l8 8M2 10l8-8" stroke="white" strokeWidth="2" strokeLinecap="square" />
           </svg>

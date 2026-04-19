@@ -62,6 +62,20 @@ const StyledButton = styled.button<StyledButtonProps>`
             box-shadow: inset 4px 4px 0px ${theme.colors.btnShadow};
             transform: translate(2px, 2px);
           }
+
+          @media (max-width: 480px) {
+            padding: 0.6rem 1.5rem;
+            font-size: 1.2rem;
+            border-width: 3px;
+            box-shadow:
+              inset -3px -3px 0px ${theme.colors.btnShadow},
+              2px 2px 0px rgba(0, 0, 0, 0.4);
+
+            &:active {
+              box-shadow: inset 3px 3px 0px ${theme.colors.btnShadow};
+              transform: translate(1px, 1px);
+            }
+          }
         `;
       case 'fullscreen':
         return css`

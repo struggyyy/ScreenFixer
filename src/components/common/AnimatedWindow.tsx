@@ -106,6 +106,11 @@ const StyledWindowContent = styled.div`
   justify-content: center;
   gap: 1rem;
   flex: 1;
+
+  @media (max-width: 480px) {
+    padding: 1rem 1.2rem;
+    gap: 0.6rem;
+  }
 `;
 
 export function AnimatedWindow({

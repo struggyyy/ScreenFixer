@@ -26,7 +26,7 @@ interface RecycleBinProps {
 }
 
 // Animated trash can — click to restore the window.
-const BinContainer = styled.div<{ $isFull?: boolean }>`
+const BinContainer = styled.button<{ $isFull?: boolean }>`
   position: fixed;
   bottom: 1.5rem;
   left: 50%;
@@ -37,11 +37,20 @@ const BinContainer = styled.div<{ $isFull?: boolean }>`
   gap: ${({ theme }) => theme.spacing.sm};
   cursor: pointer;
   z-index: 100;
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
   animation: ${binPopIn} ${({ theme }) => theme.anim.durations.long}
     ${({ theme }) => theme.anim.easings.bounce};
 
   &:hover {
     transform: translateX(-50%) translateY(-5px);
+  }
+
+  &:focus-visible {
+    filter: drop-shadow(0 0 4px ${({ theme }) => theme.colors.fullscreenText});
   }
 
   ${({ $isFull, theme }) =>
@@ -73,7 +82,12 @@ const BinLabel = styled.span`
 // Animated trash can — click to restore the window.
 export function RecycleBin({ isRestoring, onRestore }: RecycleBinProps) {
   return (
-    <BinContainer $isFull={true} onClick={onRestore}>
+    <BinContainer
+      $isFull={true}
+      onClick={onRestore}
+      type="button"
+      aria-label={isRestoring ? 'Restoring window...' : 'Restore window from recycle bin'}
+    >
       <div className="trash-icon">
         <svg
           width="120"
