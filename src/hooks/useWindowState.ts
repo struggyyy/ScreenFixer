@@ -17,7 +17,7 @@
 // React-specific imports
 import { useState, useCallback } from 'react';
 
-export interface WindowState {
+interface WindowState {
   isMinimized: boolean;
   isMaximized: boolean;
   isTrashed: boolean;

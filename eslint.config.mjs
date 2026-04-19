@@ -20,6 +20,7 @@ import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
+import unusedImports from 'eslint-plugin-unused-imports';
 
 const eslintConfig = defineConfig([
   // Next.js recommended rules
@@ -37,6 +38,7 @@ const eslintConfig = defineConfig([
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
+      'unused-imports': unusedImports,
     },
     rules: {
       // TypeScript strictness
@@ -46,6 +48,16 @@ const eslintConfig = defineConfig([
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
 
       // React
       'react/self-closing-comp': 'error',

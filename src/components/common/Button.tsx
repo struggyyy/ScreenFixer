@@ -20,7 +20,7 @@ import React from 'react';
 // External libraries
 import styled, { css } from 'styled-components';
 
-export type ButtonVariant = 'primary' | 'fullscreen' | 'intensity';
+type ButtonVariant = 'primary' | 'fullscreen' | 'intensity';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
