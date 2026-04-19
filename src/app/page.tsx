@@ -109,6 +109,9 @@ export default function Home() {
             <h1 style={{ fontSize: '2.5rem', marginBottom: '0' }}>Let&apos;s clean!</h1>
 
             <FullscreenHintRow>
+              <FullscreenHintText>
+                {isFullscreen ? 'Exit fullscreen mode' : 'Enter fullscreen for best results'}
+              </FullscreenHintText>
               <Button
                 variant="fullscreen"
                 onClick={toggleFullscreen}
@@ -116,10 +119,13 @@ export default function Home() {
               >
                 <kbd>F11</kbd>
               </Button>
-              <FullscreenHintText>
-                {isFullscreen ? 'Exit fullscreen mode' : 'Enter fullscreen for best results'}
-              </FullscreenHintText>
             </FullscreenHintRow>
+
+            <Disclaimer>
+              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering. Do not look
+              directly at the screen to avoid eye strain. For best results, leave running in the
+              background for 2-4 hours.
+            </Disclaimer>
 
             <Button
               variant="primary"
@@ -143,12 +149,6 @@ export default function Home() {
                 </Button>
               ))}
             </IntensitySelector>
-
-            <Disclaimer>
-              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering. Do not look
-              directly at the screen to avoid eye strain. For best results, leave running in the
-              background for 2-4 hours.
-            </Disclaimer>
           </WindowContent>
         </AnimatedWindow>
 

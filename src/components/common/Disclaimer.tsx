@@ -27,7 +27,6 @@ const StyledDisclaimer = styled.div`
   border: ${({ theme }) => theme.borders.btn} solid ${({ theme }) => theme.colors.windowBorder};
   background: ${({ theme }) => theme.colors.disclaimerBg};
   padding: ${({ theme }) => theme.spacing.lg};
-  margin-top: 15px;
   line-height: 1.5;
   box-shadow: ${({ theme }) => theme.shadows.btnLarge};
 `;

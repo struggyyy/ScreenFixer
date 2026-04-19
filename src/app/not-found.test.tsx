@@ -47,7 +47,9 @@ describe('NotFound Page', () => {
     renderWithTheme(<NotFound />);
 
     expect(screen.getByText('System Error')).toBeInTheDocument();
-    expect(screen.getByText(/The requested module or resource could not be found/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/The requested module or resource could not be found/),
+    ).toBeInTheDocument();
     expect(screen.getByText('Return to Desktop')).toBeInTheDocument();
   });
 
