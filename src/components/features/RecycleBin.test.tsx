@@ -12,8 +12,10 @@
  *                                                                         *
  ************************************************************************** */
 
-// External libraries
+// React-specific imports
 import React from 'react';
+
+// External libraries
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
@@ -39,7 +41,7 @@ describe('RecycleBin', () => {
   it('calls onRestore when clicked', () => {
     const handleRestore = jest.fn();
     renderWithTheme(<RecycleBin isRestoring={false} onRestore={handleRestore} />);
-    fireEvent.click(screen.getByText('1 Item').closest('div')!);
+    fireEvent.click(screen.getByText('1 Item'));
     expect(handleRestore).toHaveBeenCalledTimes(1);
   });
 });

@@ -12,8 +12,10 @@
  *                                                                         *
  ************************************************************************** */
 
-// External libraries
+// React-specific imports
 import React from 'react';
+
+// External libraries
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 

@@ -12,9 +12,11 @@
  *                                                                         *
  ************************************************************************** */
 
-// External libraries
+// React-specific imports
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+
+// External libraries
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
 // Internal imports
@@ -104,6 +106,3 @@ describe('Home Page', () => {
     jest.useRealTimers();
   });
 });
-
-// Import act from react-testing-library for timers
-import { act } from '@testing-library/react';
