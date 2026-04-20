@@ -1,8 +1,8 @@
 # ScreenFixer 📺✨
 
-A professional-grade, retro-styled screen restoration tool. ScreenFixer helps alleviate image retention and "stuck pixels" by cycling high-intensity colors while providing a nostalgic 90s-era operating system experience.
+[![License: Proprietary](https://img.shields.io/badge/license-Proprietary-red?style=for-the-badge&logo=github)](LICENSE)
 
-![ScreenFixer Preview](https://github.com/struggyyy/ScreenFixer/raw/main/public/favicon.ico) _<!-- Update this with a real screenshot once available -->_
+A professional-grade, retro-styled screen restoration tool. ScreenFixer helps alleviate image retention and "stuck pixels" by cycling high-intensity colors while providing a nostalgic 90s-era operating system experience.
 
 ## 🚀 Features
 
@@ -59,7 +59,7 @@ We maintain a high standard of code quality with >95% test coverage.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is proprietary and confidential. All rights reserved. See the [LICENSE](LICENSE) file for details.
 
 ## ⚠️ Disclaimer
 
