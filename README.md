@@ -4,6 +4,8 @@
 
 A professional-grade, retro-styled screen restoration tool. ScreenFixer helps alleviate image retention and "stuck pixels" by cycling high-intensity colors while providing a nostalgic 90s-era operating system experience.
 
+![ScreenFixer Preview](public/assets/screen-fixer-preview.png)
+
 ## 🚀 Features
 
 - **Pixel Restoration**: High-speed color cycling to stimulate stagnant pixels.
