@@ -74,12 +74,16 @@ const StyledWindow = styled.div<{
     $isMaximized &&
     css`
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       max-width: 100vw;
       border-width: 0;
       box-shadow: none;
       z-index: 50;
       border-radius: 0;
+      top: 0;
+      left: 0;
+      transform: none;
+      padding-top: env(safe-area-inset-top);
     `}
 
   ${({ $isTrashed, theme }) =>

@@ -30,7 +30,7 @@ const Overlay = styled.div<{ $isRepairing: boolean }>`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   z-index: 9999;
   pointer-events: ${({ $isRepairing }) => ($isRepairing ? 'auto' : 'none')};
   cursor: ${({ $isRepairing }) => ($isRepairing ? 'none' : 'default')};

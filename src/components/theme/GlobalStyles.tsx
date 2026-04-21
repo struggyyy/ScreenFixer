@@ -115,7 +115,7 @@ export const GlobalStyles = createGlobalStyle`
 
   html,
   body {
-    height: 100%;
+    height: 100dvh;
     width: 100%;
     background: ${({ theme }) => theme.colors.bgDesktop};
     color: ${({ theme }) => theme.colors.windowBorder};
@@ -128,7 +128,7 @@ export const GlobalStyles = createGlobalStyle`
   main {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     z-index: 10;
     display: flex;
     flex-direction: column;
