@@ -28,7 +28,14 @@ const vt323 = VT323({
   subsets: ['latin'],
 });
 
+const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: 'Screen Fixer | Retro Pixel Restoration',
   description:
     'Advanced display repair with a nostalgic 8-bit aesthetic. Fix stuck pixels and image retention.',

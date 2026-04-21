@@ -49,7 +49,7 @@ const StyledWindow = styled.div<{
   transition: all ${({ theme }) => theme.anim.durations.window}
     ${({ theme }) => theme.anim.easings.standard};
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -80,9 +80,7 @@ const StyledWindow = styled.div<{
       box-shadow: none;
       z-index: 50;
       border-radius: 0;
-      top: 0;
-      left: 0;
-      transform: none;
+      top: 50%;
       padding-top: env(safe-area-inset-top);
     `}
 
@@ -102,7 +100,7 @@ const StyledWindow = styled.div<{
     `}
 `;
 
-const StyledWindowContent = styled.div`
+const StyledWindowContent = styled.div<{ $isMaximized?: boolean }>`
   padding: 1.4rem 2rem 1.6rem;
   display: flex;
   flex-direction: column;
@@ -115,6 +113,12 @@ const StyledWindowContent = styled.div`
     padding: 1rem 1.2rem;
     gap: 0.6rem;
   }
+
+  ${({ $isMaximized }) =>
+    $isMaximized &&
+    css`
+      padding-bottom: 10vh; /* Shift content up slightly when maximized */
+    `}
 `;
 
 export function AnimatedWindow({
@@ -133,12 +137,25 @@ export function AnimatedWindow({
       $isTrashed={isTrashed}
       $isRestoring={isRestoring}
     >
-      {children}
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child) && child.type === WindowContent) {
+          return React.cloneElement(child as React.ReactElement<{ isMaximized: boolean }>, {
+            isMaximized,
+          });
+        }
+        return child;
+      })}
     </StyledWindow>
   );
 }
 
 // Window content container wrapper
-export function WindowContent({ children }: { children: React.ReactNode }) {
-  return <StyledWindowContent>{children}</StyledWindowContent>;
+export function WindowContent({
+  children,
+  isMaximized,
+}: {
+  children: React.ReactNode;
+  isMaximized?: boolean;
+}) {
+  return <StyledWindowContent $isMaximized={isMaximized}>{children}</StyledWindowContent>;
 }

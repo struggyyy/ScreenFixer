@@ -109,9 +109,6 @@ export default function Home() {
             <h1 style={{ fontSize: '2.5rem', marginBottom: '0' }}>Let&apos;s clean!</h1>
 
             <FullscreenHintRow>
-              <FullscreenHintText>
-                {isFullscreen ? 'Exit fullscreen mode' : 'Enter fullscreen for best results'}
-              </FullscreenHintText>
               <Button
                 variant="fullscreen"
                 onClick={toggleFullscreen}
@@ -119,6 +116,9 @@ export default function Home() {
               >
                 <kbd>F11</kbd>
               </Button>
+              <FullscreenHintText>
+                {isFullscreen ? 'Exit fullscreen mode' : 'Enter fullscreen for best results'}
+              </FullscreenHintText>
             </FullscreenHintRow>
 
             <Disclaimer>
