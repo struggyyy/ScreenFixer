@@ -12,6 +12,7 @@ A professional-grade, retro-styled screen restoration tool. ScreenFixer helps al
 - **Adjustable Intensity**: Choose between Low, Medium, and High refresh rates.
 - **Retro OS Interface**: A fully interactive window management system with a "crumble-and-restore" animation logic.
 - **Fullscreen Mode**: Dedicated immersion mode for maximum efficiency.
+- **Edge-to-Edge Coverage**: Unlike video-based solutions that may leave black bars (letterboxing) on the sides, ScreenFixer dynamically adjusts to your actual screen size, ensuring no pixel is left untouched.
 - **Safety First**: Integrated safety disclaimers and eye-strain warnings.
 
 ## 🛠️ Tech Stack
