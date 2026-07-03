@@ -4,7 +4,9 @@
 
 A professional-grade, retro-styled screen restoration tool. ScreenFixer helps alleviate image retention and "stuck pixels" by cycling high-intensity colors while providing a nostalgic 90s-era operating system experience.
 
-![ScreenFixer Preview](public/assets/screen-fixer-preview.png)
+[![ScreenFixer Preview](public/assets/screen-fixer-preview.png)](https://screen-fixer.vercel.app/)
+
+[**🚀 View Live Demo**](https://screen-fixer.vercel.app/)
 
 ---
 
