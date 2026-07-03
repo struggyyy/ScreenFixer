@@ -57,17 +57,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## 🧪 Testing & Quality
 
-We maintain a high standard of code quality with >95% test coverage.
+We maintain a high standard of code quality with >95% test coverage and robust tooling.
 
-- **Run Tests**: `npm test`
+- **Run Tests**: `npm run test`
+- **Watch Tests**: `npm run test:watch`
 - **Coverage Report**: `npm run test:coverage`
-- **Health Check**: `npm run check` (Lints, Formats, Tests, and Dead-code analysis)
-
----
-
-## 📄 License
-
-This project is proprietary and confidential. All rights reserved. See the [LICENSE.md](LICENSE.md) file for details.
+- **Full Health Check**: `npm run check` (Runs linting, format check, and dead-code analysis)
+- **Formatting**: `npm run format` (Write) & `npm run format:check` (Verify)
+- **Linting**: `npm run lint` & `npm run lint:fix`
+- **Dead-code Analysis**: `npm run dead-code` (Knip)
 
 ---
 
