@@ -24,10 +24,12 @@ A professional-grade, retro-styled screen restoration tool. ScreenFixer helps al
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 24+
 - npm or yarn
 
 ### Installation
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/struggyyy/ScreenFixer.git
@@ -39,10 +41,13 @@ A professional-grade, retro-styled screen restoration tool. ScreenFixer helps al
    ```
 
 ### Running the App
+
 Start the development server:
+
 ```bash
 npm run dev
 ```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ---
