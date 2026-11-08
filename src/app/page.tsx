@@ -28,6 +28,7 @@ import { RepairOverlay } from '@/components/features/RepairOverlay';
 import { WindowTitleBar } from '@/components/features/WindowTitleBar';
 import { Taskbar } from '@/components/features/Taskbar';
 import { RecycleBin } from '@/components/features/RecycleBin';
+import { CopyrightTag } from '@/components/features/CopyrightTag';
 import { PixelEyes } from '@/components/common/PixelEyes';
 import { Button } from '@/components/common/Button';
 import { Disclaimer } from '@/components/common/Disclaimer';
@@ -155,6 +156,8 @@ export default function Home() {
         <Taskbar isVisible={isMinimized} title={APP_TITLE} onRestore={unminimize} />
 
         {(isTrashed || isRestoring) && <RecycleBin isRestoring={isRestoring} onRestore={restore} />}
+
+        <CopyrightTag isHidden={isRepairing} />
       </main>
     </>
   );

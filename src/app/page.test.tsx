@@ -45,6 +45,8 @@ describe('Home Page', () => {
     renderWithTheme(<Home />);
     expect(screen.getByText("Let's clean!")).toBeInTheDocument();
     expect(screen.getByText('Start Screen Repair')).toBeInTheDocument();
+    expect(screen.getByText('© 2026 STRUGGYYY')).toBeInTheDocument();
+    expect(screen.getByTestId('copyright-tag')).toHaveStyle('opacity: 1');
   });
 
   it('toggles intensity when clicking intensity buttons', () => {
@@ -62,6 +64,10 @@ describe('Home Page', () => {
     // AnimatedWindow should be hidden (via isHidden prop)
     // We can check if specific text is still visible or check DOM state
     expect(screen.getByText("Let's clean!")).toBeInTheDocument();
+    // CopyrightTag should be hidden when repair is running
+    const copyrightTag = screen.getByTestId('copyright-tag');
+    expect(copyrightTag).toHaveStyle('opacity: 0');
+    expect(copyrightTag).toHaveStyle('visibility: hidden');
   });
 
   it('minimizes and restores the window', () => {
