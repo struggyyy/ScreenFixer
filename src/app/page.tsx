@@ -70,6 +70,19 @@ const IntensitySelector = styled.div`
   gap: ${({ theme }) => theme.spacing.md};
 `;
 
+const RecommendationText = styled.p`
+  font-size: 0.85rem;
+  color: ${({ theme }) => theme.colors.disclaimerText};
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+
+  @media (max-width: 480px) {
+    font-size: 0.78rem;
+  }
+`;
+
 // Main Page Component
 
 export default function Home() {
@@ -123,9 +136,9 @@ export default function Home() {
             </FullscreenHintRow>
 
             <Disclaimer>
-              <strong>SAFETY WARNING:</strong> This tool causes rapid flickering. Do not look
-              directly at the screen to avoid eye strain. For best results, leave running in the
-              background for 2-4 hours.
+              <strong>SAFETY WARNING:</strong> This tool produces rapid flickering that may trigger
+              photosensitive epilepsy, severe dizziness, nausea, or eye strain. Do not look directly
+              at the screen while running.
             </Disclaimer>
 
             <Button
@@ -150,6 +163,10 @@ export default function Home() {
                 </Button>
               ))}
             </IntensitySelector>
+
+            <RecommendationText>
+              For best results, leave running for 2-4 hours.
+            </RecommendationText>
           </WindowContent>
         </AnimatedWindow>
 

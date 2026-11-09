@@ -78,7 +78,7 @@ We maintain a high standard of code quality with >95% test coverage and robust t
 
 ## ⚠️ Disclaimer
 
-**WARNING: FLICKERING IMAGES.** This application produces rapid color changes. Do not use this tool if you have a history of photosensitive epilepsy or are sensitive to flashing lights.
+**WARNING: FLICKERING IMAGES.** This application produces rapid color changes and flickering that may trigger photosensitive epilepsy, severe dizziness, nausea, or eye strain. Do not look directly at the screen while running, and do not use this tool if you have a history of photosensitive epilepsy or sensitivity to flashing lights.
 
 ---
 
